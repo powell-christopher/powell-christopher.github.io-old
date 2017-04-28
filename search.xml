@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+    
+    <entry>
+      <title><![CDATA[Chocolatey Package Manager]]></title>
+      <url>http://powell-christopher.github.io/2017/04/27/Chocolatey-Package-Manager/</url>
+      <content type="html"><![CDATA[<p>In this article we will discuss the free and open source version of the <a href="https://chocolatey.org/" target="_blank" rel="external">Chocolatey</a> Package Manager for Windows. The benefits and some of the caveats encountered whilst using it.</p>
+<a id="more"></a>
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>Anyone who is accustomed to working within a Linux environment will be used to working with a package manager. YUM for Redhat-based distros, Aptitude for variants of Ubuntu, and so on and so forth. Typical responsibilities for a package manager include the installation, updating and removal of software packages whilst also handling dependency management and any actions that need to be taken whilst performing any of the mentioned processes. Package type will also differ by distro (rpm, deb, etc.).</p>
+<p>To people used to working in a Windows environment, the above might sound like very alien concepts. Windows users are used to the idea of an installer. A package that will install the software that you need and any required dependencies. They’re also used to “hunting” for their software online. Go to the relevant software product’s website, download the installer and install. More recent versions of Windows have introduced the concept of a Windows Store in an effort to try and centralize and offer a curated portfolio of software, thus making the whole experience more user friendly.</p>
+<p>The Windows Store is a step forward but it brings its own set of issues. The software you want might not be on the store at all. Also, the generic update mechanism employed can cause software installs to break just because the software was not built with that feature in mind in the first place.</p>
+<p>This means that the go-to method for software installation in Windows is still the traditional installer. Again here we have a number of issues. For one, Windows supports a variety of installer types (MSI, NSIS, InnoStep, etc.) which causes fragmentation. Also, most installers will involve some sort of wizard that the user needs to navigate trough, meaning there is a focus on manual user interaction which is further compounded by the previous issue where we have a variety of installer types which will all offer their own slightly different user experience. Software will, by default, get installed to disparate locations. Sometimes in Program Files, sometimes in elsewhere. Another problem is the lack of upgrade mechanism. Basically unless the installed software itself has some way of checking for you if there is a newer version available, then you are left with manually checking for updates; downloading and installing said updates yourself.</p>
+<p>The above may not be serious issues in a casual environment where perhaps the setup and maintenance of software is not a very common occurrence. However, transpose the above issues into a more professional environment, say the setup of a development environment and it becomes more of a problem. All of the issues mentioned conspire to make unification and automation difficult. </p>
+<h1 id="Chocolatey"><a href="#Chocolatey" class="headerlink" title="Chocolatey"></a>Chocolatey</h1><p>Enter Chocolatey, a package manager for Windows!</p>
+<p>Chocolatey aims to give Windows users the same experience as Linux users when it comes to package management. The idea being that one can manage, install, upgrade and uninstall Windows software using the command line.</p>
+<h2 id="But-How"><a href="#But-How" class="headerlink" title="But How?"></a>But How?</h2><p>Chocolatey supports a variety of Windows package formats. It uses PowerShell in order to perform higher privilege tasks and uses Unattended Installations to do away with Setup Wizards.</p>
+<p>It does this from a user friendly CLI that closely emulates other more established package managers from the Linux world.</p>
+<h2 id="Installing-Chocolatey"><a href="#Installing-Chocolatey" class="headerlink" title="Installing Chocolatey"></a>Installing Chocolatey</h2><p>Installing Chocolatey is easy. You simply open an Command Shell as an Administrative user, by either right-clicking on the Windows Start button and then selecting the <em>Command Prompt (Admin)</em> option, or by selecting the standard Command Prompt shortcut and triggering that via Ctrl-Shift-Enter combo, and then execute the below command:</p>
+<figure class="highlight plain"><figcaption><span>Installing Chocolatey</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@powershell -NoProfile -ExecutionPolicy Bypass -Command &quot;iex ((New-Object System.Net.WebClient).DownloadString(&apos;https://chocolatey.org/install.ps1&apos;))&quot; &amp;&amp; SET &quot;PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin&quot;</div></pre></td></tr></table></figure>
+<p>For more information about installation options please refer to the Chocolatey Installation Documentation <a href="https://chocolatey.org/install" target="_blank" rel="external">here</a>.</p>
+<h2 id="Installing-Software-through-Chocolatey"><a href="#Installing-Software-through-Chocolatey" class="headerlink" title="Installing Software through Chocolatey"></a>Installing Software through Chocolatey</h2><p>Looking for available software and installing is easy. Say we want to install <a href="https://git-scm.com/download/win" target="_blank" rel="external">GIT for Windows</a>. We start by looking it up via the <em>search</em> command (make sure you do this in an Admin shell):</p>
+<figure class="highlight plain"><figcaption><span>Search</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">choco search git</div></pre></td></tr></table></figure>
+<p>The above should provide us with a list of GIT related packages, one of which is GIT itself, and its current version number.</p>
+<p>To install we simply use the install command:</p>
+<figure class="highlight plain"><figcaption><span>Install</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">choco install git</div></pre></td></tr></table></figure>
+<p>That’s it! No browsing, no searching, no wizards. Done!</p>
+<h2 id="Managing-Installed-Software"><a href="#Managing-Installed-Software" class="headerlink" title="Managing Installed Software"></a>Managing Installed Software</h2><p>You can get some help with the high level features of Chocolatey by bringing up the help information:</p>
+<figure class="highlight plain"><figcaption><span>Getting Help</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">choco -h</div></pre></td></tr></table></figure>
+<p>We can get a list of the software that Chocolatey is managing for us like so:</p>
+<figure class="highlight plain"><figcaption><span>Listing installed software</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">choco list -l</div></pre></td></tr></table></figure>
+<p>We can upgrade our software when a new version is released:</p>
+<figure class="highlight plain"><figcaption><span>Upgrading</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">choco upgrade git</div></pre></td></tr></table></figure>
+<p>And we can uninstall software when we are done with it:</p>
+<figure class="highlight plain"><figcaption><span>Uninstalling</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">choco uninstall git</div></pre></td></tr></table></figure>
+<p>…among other things :) Please refer to the Chocolatey documentation for further help.</p>
+<h2 id="Anything-Else"><a href="#Anything-Else" class="headerlink" title="Anything Else?"></a>Anything Else?</h2><p>One of the things to keep in mind is that since Chocolatey is basically performing Unattended Installations, it is picking default settings for everything. Any options provided by the Setup Wizard, it is as if we’re picking the default option for all queries. One effect of this is that software will get installed to its own default location and is not maintained in a common location of any sort. A bigger issue is that any optional installs that we may want to trigger will not be triggered at all. </p>
+<p>There are ways to circumvent these issues. Chocolatey will allow you to pass parameters to the underlying installer. However, said parameters are unique per installer type, meaning one needs to figure out what the installer type is, figure out what parameters are offered and then pass those parameters to Chocolatey in order to get the desired custom install. In my case, I did not want to go through all of this complication so when I needed a custom install, I first did a vanilla install using Chocolatey and then re-ran the Installer and customized the installation in the Wizard. The new software install will still be visible to Chocolatey as it still retains the package information for the previous install since we never uninstalled.</p>
+<p>The PRO version, which I have not tried, apparently solves this issue by having a generic wrapper to abstract away the differences between different installer types. It also offers a number of other features on top of the open source version such as private package repositories.</p>
+<p>Another issue is that not all software is on Chocolatey, and not all software that is on Chocolatey is up-to-date. Basically, today, you cannot get by with Chocolatey alone.</p>
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>In closing, I think Chocolatey is an excellent tool for people working on a Windows based environment. There is certainly a growing eco system of tooling in this particular area of concern to look at. Examples include Microsoft <a href="https://github.com/oneget/oneget" target="_blank" rel="external">OneGet</a>, a manager of package managers that actually comes packaged with Windows 10, and <a href="http://www.boxstarter.org/" target="_blank" rel="external">Boxstarter</a>, an automation tool that leverages Chocolatey under the hood.</p>
+<p>There are caveats to it, some of which I have mentioned above, that are really less issues with Chocolatey itself and more side effects of the fact that the underlying Operating System and Software Maintenance process were never designed with these workflows in mind.</p>
+<p>Even so, I think this is a big step forward and will hopefully keep driving interest in this area of concern so as to keep seeing constant improvement.</p>
+<p>Till next time…</p>
+]]></content>
+      
+        <categories>
+            
+            <category> Windows Development </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Chocolatey </tag>
+            
+            <tag> Package Management </tag>
+            
+            <tag> Windows </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Getting started with Hexo.io]]></title>
+      <url>http://powell-christopher.github.io/2017/03/27/Getting-Started-with-Hexo.io/</url>
+      <content type="html"><![CDATA[<p>In this article I will run you through the process of setting up this blog using the <a href="http://hexo.io" target="_blank" rel="external">Hexo</a> Static Website Generator.</p>
+<a id="more"></a>
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>This blog is hosted on <a href="http://github.io" target="_blank" rel="external">GitHub Pages</a> which offers free hosting of your content stored on your <a href="http://github.com" target="_blank" rel="external">GitHub Repository</a>.</p>
+<p>For anyone starting out and planning to host his content on GitHub Pages, I would recommend using their inbuilt <a href="http://jekyllrb.com" target="_blank" rel="external">Jekyll</a> integration. This will automatically create a skeleton Jekyll project for you and store it on your GitHub account. You can then manage your project as per usual using GitHub and have your content generated and deployed automatically for you via the Jekyll integration.</p>
+<p>When I first started working on this blog, I was not yet committed to hosting it on GitHub Pages, plus the Jekyll integration was not yet there. I thus setup my own Static Website Generator and eventually deployed to GitHub Pages. I also decided to follow a similar paradigm and host the sources to my website on GitHub as well. Whether you plan to setup your own Static Website Generator in order to host your website somewhere other than GitHub Pages, or whether you are doing this just to learn more about Static Website Generation, I still feel that this is an interesting exercise and I learned a lot whilst doing it.</p>
+<h2 id="Choosing-a-Static-Website-Generator"><a href="#Choosing-a-Static-Website-Generator" class="headerlink" title="Choosing a Static Website Generator"></a>Choosing a Static Website Generator</h2><p>My hunt for a Static Website Generator started on <a href="https://www.staticgen.com/" target="_blank" rel="external">StaticGen</a>. Here I ended up choosing Hexo. My main reason for opting for Hexo in lieu of something more popular like Jekyll is that Hexo is based on Node.js whereas Jekyll is based on Ruby. I have some Node.js experience but no experience with Ruby. As already discussed in my introduction to Static Generators, this does not really impact the user experience. Both Generators use Markdown as a syntax for their content so their being based on different languages would really only have an impact at setup time. Seeing as my development machine had Node.js already setup, and not wanting to overload it with Ruby and its dependencies, I decided to opt for Hexo. Again, one big advantage of using Markdown as a common syntax is that I can very easily migrate my content to a different Static Generator should I wish to do so.</p>
+<h1 id="Hexo-Setup"><a href="#Hexo-Setup" class="headerlink" title="Hexo Setup"></a>Hexo Setup</h1><p>Installing Hexo is very straightforward. Being based on Node.js, you can install it easily using npm.</p>
+<figure class="highlight plain"><figcaption><span>Hexo setup</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g hexo-cli</div></pre></td></tr></table></figure>
+<h1 id="Project-Setup"><a href="#Project-Setup" class="headerlink" title="Project Setup"></a>Project Setup</h1><p>Once Hexo is successfully installed, creating a new project is also very easy.</p>
+<figure class="highlight plain"><figcaption><span>Project setup</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">hexo init blog</div><div class="line">cd blog</div><div class="line">npm install</div></pre></td></tr></table></figure>
+<p>The hexo init command will create a project within a folder matching the specified project name. This project will be based on a scaffold with the following structure:</p>
+<ul>
+<li>_config.xml</li>
+<li>package.json</li>
+<li>scaffolds</li>
+<li>source<ul>
+<li>_drafts</li>
+<li>_posts</li>
+</ul>
+</li>
+<li>themes</li>
+</ul>
+<p><strong>_config.xml</strong> holds the project configuration. You can get the full details on what is customizable <a href="http://hexo.io/docs/configuration.html" target="_blank" rel="external">here</a>.</p>
+<p><strong>package.json</strong> will contain the project dependencies as per any Node.js application.</p>
+<p><strong>scaffolds</strong> contains the file scaffolds used when creating new content.</p>
+<p><strong>source</strong> will contain the sources for our content written in Markdown.</p>
+<p><strong>themes</strong> will contain the file structure of any installed themes. The selected theme will get merged with our content at build time to produce our website.</p>
+<p>Running npm install will download and install any required dependencies of the project as define in <strong>package.json</strong>.</p>
+<h1 id="Basic-Project-Config"><a href="#Basic-Project-Config" class="headerlink" title="Basic Project Config"></a>Basic Project Config</h1><p>Let’s start with some very basic project configuration.</p>
+<p>If we open <strong>_config.xml</strong> for editing, we can start by customizing the most basic information pertaining to our new website project.</p>
+<figure class="highlight plain"><figcaption><span>_config.xml</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line"># Site</div><div class="line">title: Christopher Powell</div><div class="line">subtitle: Adventures in Coding</div><div class="line">description: Technical lessons learned to share with the community</div><div class="line">author: Christopher Powell</div><div class="line">language: en</div><div class="line">timezone: Europe/Malta</div><div class="line"></div><div class="line"># URL</div><div class="line">url: http://powell-christopher.github.io</div><div class="line">root: /</div><div class="line">permalink: :year/:month/:day/:title/</div><div class="line">permalink_defaults:</div><div class="line">...</div></pre></td></tr></table></figure>
+<h1 id="First-Test-Run"><a href="#First-Test-Run" class="headerlink" title="First Test Run"></a>First Test Run</h1><p>Hexo includes a server for local testing of our project. Doing a server run will automatically build our project if it has not already been built using the <strong>generate</strong> command.</p>
+<p>Let’s try that out now…</p>
+<figure class="highlight plain"><figcaption><span>Starting a local test server</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo server --draft --open</div></pre></td></tr></table></figure>
+<p>This should start our local test server and automatically kick up our default browser and point it to our new website for us. Pretty snazzy…</p>
+<p>The <strong>draft</strong> option makes any draft posts we may have visible. These are not made visible by default and are not included in a normal deployment of our website.</p>
+<p>The <strong>open</strong> option is what triggers the automatic loading of the website in our browser as a convenience.</p>
+<p>An added perk is BrowserSync support which allow the server to listen for changes to its sources and generate new content as we author our posts, meaning we will see our edits show up on our browser as we work without restarting the server. Awesome :)</p>
+<p><strong>Note:</strong> This only applies to sources. Things like changes in configuration, installation of new plugins or themes, etc. will still require a restart of the server.</p>
+<h1 id="Authoring-a-Post"><a href="#Authoring-a-Post" class="headerlink" title="Authoring a Post"></a>Authoring a Post</h1><p>Time to start working on our first post…</p>
+<figure class="highlight plain"><figcaption><span>Creating a new Post</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo new draft &quot;Hello World&quot;</div></pre></td></tr></table></figure>
+<p>Hexo will now create a skeleton for our new “Hello World” post using its current setup scaffolds. The above command will return the full path to the file representing the new post. We can now open this file for editing and start working on it. As previously discussed, the syntax used is Markdown. For help in getting started with Markdown please refer to the documentation <a href="http://daringfireball.net/projects/markdown/" target="_blank" rel="external">here</a>.</p>
+<p>Remember that as we’re editing we can see the output HTML in real-time in our browser instance thanks to the included BrowserSync support.</p>
+<p><strong>Note:</strong> By defining the <strong>draft</strong> option, we create our post as a draft meaning it will not be included in a normal deployment until it is published. If you’d rather skip this step and author the post directly without going through the draft stage, simple remove the draft option from the command above.</p>
+<h1 id="Publishing-a-Post"><a href="#Publishing-a-Post" class="headerlink" title="Publishing a Post"></a>Publishing a Post</h1><p>Assuming that we chose to draft our post instead of publishing it directly, we need to manually publish it before it will be included in a standard deployment of our website.</p>
+<figure class="highlight plain"><figcaption><span>Publishing a Post</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo publish &quot;Hello World&quot;</div></pre></td></tr></table></figure>
+<p>The above basically has the effect of shifting our post from <strong>source/_drafts</strong> to <strong>source/_posts</strong>.</p>
+<h1 id="Deployment"><a href="#Deployment" class="headerlink" title="Deployment"></a>Deployment</h1><p>Now that we have a first version of our website we can deploy it and share it with the world!</p>
+<p>This can be achieved very easily using hexo as it has an inbuilt <strong>deploy</strong> command that just needs a bit of configuration from us.</p>
+<p>In my particular case, I am deploying to GitHub Pages which is obviously <strong>git</strong> based. Based on their documentation, I just need to deploy to a specific GitHub repo. The config for that looks as follows:</p>
+<figure class="highlight plain"><figcaption><span>_config.yml</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line"># Deployment</div><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repo: https://github.com/powell-christopher/powell-christopher.github.io.git</div><div class="line">  branch: master</div><div class="line">  message: hexo deploy</div><div class="line">...</div></pre></td></tr></table></figure>
+<p>Now that our configuration is in place, we can go ahead and deploy…</p>
+<figure class="highlight plain"><figcaption><span>Deployment</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">hexo clean</div><div class="line">hexo generate</div><div class="line">hexo deploy</div></pre></td></tr></table></figure>
+<p><strong>hexo clean</strong> will delete any previously generated content. It is good practice to start with a clean so that we can be sure that the output reflects the state of our sources exactly.</p>
+<p><strong>hexo generate</strong> will generate our static website based on our sources and selected theme (currently default).</p>
+<p><strong>hexo deploy</strong> deploys the generated output to our designated destination.</p>
+<p>That’s it!</p>
+<h1 id="Extras"><a href="#Extras" class="headerlink" title="Extras"></a>Extras</h1><p>In this section we will cover some nice extras that will facilitate our authoring process and add some extra value added to our website.</p>
+<h2 id="Maintain-Sources-in-VCS"><a href="#Maintain-Sources-in-VCS" class="headerlink" title="Maintain Sources in VCS"></a>Maintain Sources in VCS</h2><p>It is always a good idea to maintain our sources in a VCS solution. In my case I am using a GitHub repo. Let’s go ahead and deploy our project to GitHub.</p>
+<figure class="highlight plain"><figcaption><span>Commit to git and push to remote</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">hexo clean</div><div class="line">git init</div><div class="line">git add --all</div><div class="line">git commit -m &quot;Initial Commit&quot;</div><div class="line">git remote add origin https://github.com/powell-christopher/powell-christopher.github.io.git</div><div class="line">git remote -v</div><div class="line">git push origin master</div></pre></td></tr></table></figure>
+<p>In the above flow, we’re starting with a <strong>hexo clean</strong> to delete any generated content since we don’t want to store that with the sources. We then initialize git via a <strong>git init</strong> (since the project already exists). We now start working on our first commit. We basically add the whole directory (including subdirectories) containing our project via a <strong>git add -all</strong> and then commit the lot (locally) and specify a commit message. Now that the sources have been committed locally, we need to push the commit to the remote repo. To do that we first add the remote repo as an <strong>origin</strong> and finally we push to the <strong>master</strong> branch of our new <strong>origin</strong>.</p>
+<p>Now that our source project is safely stored, we can push to our remote repo whenever we have new changes to commit.</p>
+<figure class="highlight plain"><figcaption><span>Commit to git and push to remote</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">hexo clean</div><div class="line">git add --all &amp;&amp; git commit -m &quot;More changes...&quot;</div><div class="line">git push origin master</div></pre></td></tr></table></figure>
+<h2 id="Switching-to-a-new-Theme"><a href="#Switching-to-a-new-Theme" class="headerlink" title="Switching to a new Theme"></a>Switching to a new Theme</h2><p>Hexo offers a number of ready-made <a href="http://hexo.io/themes" target="_blank" rel="external">themes</a> to choose from.</p>
+<p>I am personally using the <a href="https://github.com/iissnan/hexo-theme-next/blob/master/README.en.md" target="_blank" rel="external">NexT</a> theme since I like the minimalist look of it. The same process should apply to any other theme.</p>
+<p>Installing the theme basically involves cloning the relevant git repo into our <strong>themes</strong> directory.</p>
+<figure class="highlight plain"><figcaption><span>Cloning a theme repo</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone https://github.com/iissnan/hexo-theme-next themes/next</div></pre></td></tr></table></figure>
+<p>The above will create a <strong>themes/next</strong> directory and clone the theme source project there.</p>
+<p>Now we need to instruct our hexo project to use the new theme. We just need to define the theme location in the configuration.</p>
+<figure class="highlight plain"><figcaption><span>_config.yml</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line"># Extensions</div><div class="line">theme: next</div><div class="line">...</div></pre></td></tr></table></figure>
+<p>At this point we can start our test server or redeploy our project and we should be using the new theme.</p>
+<h2 id="Categories-Tags-etc"><a href="#Categories-Tags-etc" class="headerlink" title="Categories, Tags, etc."></a>Categories, Tags, etc.</h2><p>Hexo supports a number of specialized page types intended to aid in navigation of our website. Categories and Tags are examples of this.</p>
+<p>Taking categories as an example, we start by creating a categories page.</p>
+<figure class="highlight plain"><figcaption><span>Creating a Categories page</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo new page &quot;categories&quot;</div></pre></td></tr></table></figure>
+<p>The above results in a <strong>categories</strong> directory being created under <strong>sources</strong> with an <strong>index.md</strong> file inside. We now need to open this file for editing and add a <strong>type: “categories”</strong> key-value pair.</p>
+<figure class="highlight plain"><figcaption><span>Tagging page as a Categories-Type</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">---</div><div class="line">title: categories</div><div class="line">date: 2017-03-27 20:00:00</div><div class="line">desc:</div><div class="line">type: &quot;categories&quot;</div><div class="line">---</div></pre></td></tr></table></figure>
+<p>The above new page will have content auto-generated for us by Hexo representing our post categories. In order to get that functionality, we just need to enable it in our <strong>_config.yml</strong> by uncommenting the <strong>category-dir: categories</strong> key-value pair.</p>
+<figure class="highlight plain"><figcaption><span>_config.yml</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line"># Directory</div><div class="line">source_dir: source</div><div class="line">public_dir: public</div><div class="line">#tag_dir: tags</div><div class="line">archive_dir: archives</div><div class="line">category_dir: categories</div><div class="line">code_dir: downloads/code</div><div class="line">i18n_dir: :lang</div><div class="line">skip_render:</div><div class="line">...</div></pre></td></tr></table></figure>
+<p>Now that we have a categories page generated by Hexo, we need a way to navigate to it. To do that we need to modify the menu for our selected theme by modifying the theme configuration. In my case this lives in <strong>themes/next/_config.yml</strong>. We simply uncomment the <strong>categories: /categories</strong> key-value pair. It is important that the page name matches throughout.</p>
+<figure class="highlight plain"><figcaption><span>themes/next/_config.yml</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line">menu:</div><div class="line">  home: /</div><div class="line">  categories: /categories</div><div class="line">  about: /about</div><div class="line">  archives: /archives</div><div class="line">  #tags: /tags</div><div class="line">  #sitemap: /sitemap.xml</div><div class="line">  #commonweal: /404.html</div><div class="line">...</div></pre></td></tr></table></figure>
+<p>We can now restart our test server or redeploy our project to see the results.</p>
+<p>Enabling <strong>tags</strong> is exactly the same procedure as per categories.</p>
+<h2 id="Setting-up-a-Favicon"><a href="#Setting-up-a-Favicon" class="headerlink" title="Setting up a Favicon"></a>Setting up a Favicon</h2><p>Looking at the NexT theme config file, we see that it expects a <strong>favicon.ico</strong> file in our <strong>source</strong> directory.</p>
+<figure class="highlight plain"><figcaption><span>themes/next/_config.yml</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line"># Put your favicon.ico into `hexo-site/source/` directory.</div><div class="line">favicon: /favicon.ico</div><div class="line">...</div></pre></td></tr></table></figure>
+<p>To set a favicon, all we need to do is place the expected file in the expected location. If one wold like to use a different filename or filetype, then we can easily modify the above configuration to take that into account.</p>
+<h2 id="Social-Media-Integrations"><a href="#Social-Media-Integrations" class="headerlink" title="Social Media Integrations"></a>Social Media Integrations</h2><p>The Hexo NexT theme offers a number of Social Media integrations. From having a quick look at the config file, the list includes Disqus, FaceBook, Duoshuo and more.</p>
+<p>Leveraging this is easy. In my case I wanted to use Disqus in order to have user comments on my pages. This turned out to be very easy. I just went on <a href="http://disqus.com" target="_blank" rel="external">disqus.com</a> and setup an account. I then setup a <strong>site</strong> and specified the URL where my website is hosted.</p>
+<p>At this point all that is left is to enable the disqus integration by specifying my disqus username in the theme config file.</p>
+<figure class="highlight plain"><figcaption><span>themes/next/_config.yml</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line"># Disqus</div><div class="line">disqus_shortname: YOUR_DISQUS_USERNAME</div><div class="line">...</div></pre></td></tr></table></figure>
+<p>If we redeploy and navigate to one of our posts we should now see the Disqus provided content at the bottom of the post.</p>
+<h2 id="Analytics"><a href="#Analytics" class="headerlink" title="Analytics"></a>Analytics</h2><p>Similarly to the Social Media integrations discussed above, the Hexo NexT theme supports a number of analytics suite integrations including Google Analytics, Baidu, etc.</p>
+<p>Setting up <a href="http://analytics.google.com" target="_blank" rel="external">Google Analytics</a> is simple. After setting up an account, we add a new website to the admin and generate a token for it. With this token in hand, we just need to define it in our configuration.</p>
+<figure class="highlight plain"><figcaption><span>themes/next/_config.yml</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line"># Google Analytics</div><div class="line">google_analytics: YOUR_TOKEN</div><div class="line">...</div></pre></td></tr></table></figure>
+<h1 id="Closing-off"><a href="#Closing-off" class="headerlink" title="Closing off"></a>Closing off</h1><p>That about sums it up in terms of my experience thus far with the Hexo Static Website Generator. Moving forward I intend to experiment with other Static Generators to build a better understanding of how they differ. I also plan to have a look at some of the tools listed on <a href="http://headlesscms.org" target="_blank" rel="external">headlessCMS</a> which provides a list of CMSs for <a href="http://jamstack.org" target="_blank" rel="external">JAMstack</a> Sites. It will be interesting to see what they bring to the table and whether the simplified administration poses any limitations on what we can do with the underlying Static Generator. When I find some time to do that and build some confidence with that tooling I will create a post on this blog to share my experience.</p>
+<p>In the meantime, thank you for joining me in this dive into Hexo and I hope that you find this useful.</p>
+<p>Till next time…</p>
+]]></content>
+      
+        <categories>
+            
+            <category> Web Development </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Static Website Generators </tag>
+            
+            <tag> Hexo.io </tag>
+            
+            <tag> Markdown </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Static Website Generators]]></title>
+      <url>http://powell-christopher.github.io/2016/12/19/Static-Website-Generators/</url>
+      <content type="html"><![CDATA[<p>When I decided to start working on this blog, in my mind I had two options:</p>
+<ul>
+<li>Write it RAW from the ground up</li>
+<li>Use a Content Management System (CMS) like <a href="https://wordpress.org/" target="_blank" rel="external">WordPress</a> or <a href="https://www.joomla.org/" target="_blank" rel="external">Joomla!</a></li>
+</ul>
+<p>As usual I took a bit of a pause to investigate before getting stuck in and I thus bumped into Static Website Generators. Suffice to say, I never looked back.</p>
+<a id="more"></a>
+<p>So lets start by briefly discussing the advantages and disadvantages or rolling your own or using a CMS.</p>
+<h1 id="Rolling-your-own-website-blog"><a href="#Rolling-your-own-website-blog" class="headerlink" title="Rolling your own website/blog"></a>Rolling your own website/blog</h1><p>If you have the required skills, rolling your own may be the easiest way of getting something done quickly.</p>
+<h2 id="Advantages"><a href="#Advantages" class="headerlink" title="Advantages"></a>Advantages</h2><ul>
+<li>Exactly what you need. Nothing more. Nothing less.</li>
+<li>If you’re starting small, the amount of work needed may be relatively small</li>
+<li>If you already have the skills, you don’t need to learn a new tool or new system</li>
+<li>As custom as it gets</li>
+</ul>
+<h2 id="Disadvantages"><a href="#Disadvantages" class="headerlink" title="Disadvantages"></a>Disadvantages</h2><ul>
+<li>More work</li>
+<li>Error Prone</li>
+<li>First versions will probably be pretty bare bones</li>
+<li>Each new feature introduced will introduce new complexity</li>
+<li>Work load will get out of hand pretty quickly</li>
+</ul>
+<p>Rolling your own can be seen as the “traditional” approach to Web Development. As already discussed, things start getting complicated as you keep adding functionality. Stacks such as <a href="https://en.wikipedia.org/wiki/LAMP_%28software_bundle%29" target="_blank" rel="external">LAMP</a> were introduced to help developers get more done more quickly by offering a packaged client-server solution and code skeletons. Modern tooling such as node.js based scaffolding frameworks are based on similar concepts. They allow you to get going much faster and offer a tooling ecosystem but ultimately you are still responsible for your own codebase and the uptime and upkeep of you system.</p>
+<h1 id="Using-a-CMS"><a href="#Using-a-CMS" class="headerlink" title="Using a CMS"></a>Using a CMS</h1><p>Using a CMS such as <a href="https://wordpress.org/" target="_blank" rel="external">WordPress</a> or <a href="https://www.joomla.org/" target="_blank" rel="external">Joomla!</a> was the goto approach if you needed something pretty standard, but you also needed it done quickly, needed it to look good and needed a decent feature list.</p>
+<h2 id="Advantages-1"><a href="#Advantages-1" class="headerlink" title="Advantages"></a>Advantages</h2><ul>
+<li>Easy to get started</li>
+<li>Ready-made templates</li>
+<li>Ready-made themes</li>
+<li>Ready-made plugins</li>
+<li>Marketplace for quality, high end content</li>
+<li>UI based configuration</li>
+<li>Built-in WYSIWYG editors</li>
+</ul>
+<h2 id="Disadvantages-1"><a href="#Disadvantages-1" class="headerlink" title="Disadvantages"></a>Disadvantages</h2><ul>
+<li>May be overkill for you needs</li>
+<li>Slow</li>
+<li>As you install 3rd party templates, themes, plugins, etc. maintainability becomes a concern</li>
+<li>Learning curve</li>
+<li>Each new plugin installed introduces its own learning curve and dependencies</li>
+<li>Cumbersome management tooling</li>
+<li>Maintenance cost of keeping the CMS, plugins and dependencies up to date</li>
+<li>Migrating to a newer version can be challenging</li>
+<li>Migrating to a difference CMS may be difficult if not impossible</li>
+</ul>
+<p>A CMS allows you to get a lot done quickly. Using an intuitive UI, one can create the skeleton of his website based on ready-made themed templates and then get immediately into populating it with articles, etc. New features and capabilities can be easily added on via plugins. Popular CMS systems will also offer a marketplace for high quality, well supported, templates, plugins, etc. All this does come at a cost though. It may not be evident in the beginning but as the project grows, so too will the maintenance cost of keeping a system made up of disparate 3rd party plugins ticking and up-to-date. This is especially important from a security standpoint. The popularity of the CMS will be directly proportional to how much work people put into finding its vulnerabilities. Even if the CMS project itself and plugins used are well supported and have frequent releases, dealing with the update process is a big maintenance cost. Typically this is also when you start hitting a performance wall.  </p>
+<h1 id="Why-Static-Website-Generators"><a href="#Why-Static-Website-Generators" class="headerlink" title="Why Static Website Generators?"></a>Why Static Website Generators?</h1><p>Static Website Generators are not a new idea. Referencing back to the “rolling your own” option, that’s how the earliest websites used to be; completely static. Eventually we got to a stage where the limitations of HTML forced developers to look at other tooling in order to augment its capabilities. Thus stacks like the previously discussed LAMP were born. Such stacks opened our eyes to the possibilities of dynamic content on websites and we basically never looked back. Fast forward to the modern Web 2.0 style web applications which have blurred the lines between web applications and native, desktop applications even further. Of course all this comes a the cost of server-side compute resources and stack complexity.</p>
+<p>The solution that we primarily adopt when it comes to circumventing the cost and attached latency of server-side computations is caching. One would typically try and split his content into static and dynamic content. The static part would be cached using a separate mechanism, possibly a third party CDN. In order to cache the dynamic content, one would need to adopt a more complex caching mechanism, one that will have to have some sort of cache invalidation mechanism. Cache invalidation is not a simple problem to solve. Add distributed caching to the mix and the issue becomes even more complex.</p>
+<p>One important consideration to make however, is whether the benefits of providing dynamic server content is worth the cost of admission. When it comes to complex web applications, the answer is most probably yes. However, for something that by its very nature is more static, like this very blog, then the answer might be a bit different.</p>
+<p>Moreover, opting for a static back-end nowadays does not impose the same limitations as it once did. The technology stacks in the front-end space have advanced tremendously in recent years. We’ve seen a great deal of advancement in web browsers and their JavaScript engines. We’ve seen advancement in HTML itself. We’ve seen a multitude of related tooling flourish. A lot of the capabilities that historically were exclusively offered in the realm of back-end services can nowadays be had via the inclusion of a simple JavaScript script. Thus, static generation and static content are no longer one and the same.</p>
+<p>Static Website Generators exist specifically to cater for this new growing trend. On websites such as <a href="https://www.staticgen.com/" target="_blank" rel="external">StaticGen</a> one may find a huge list of available static generators. In fact, because of the sheer amount of them, getting starting might seem difficult as different static website generators will be based on different programming languages and different template engines. There may also be differences in terms of which plugins they natively support, etc.</p>
+<p>The reality however is that a lot of them share a common denominator, <a href="http://daringfireball.net/projects/markdown/" target="_blank" rel="external">Markdown</a>. Markdown is a text to HTML engine that offers both an intuitive syntax and a tool to convert said syntax into HTML. Markdown is incredibly easy to read and write. In a modern static website generator, creating new content basically amounts to writing your content in Markdown, compiling it to HTML via the provided tooling, and uploading the content to your host server. Another perk is that since Markdown is a shared common denominator across different static website generators, one can easily migrate content from one to the other. The differences between different static generators will primarily only impact the average user on initial setup.  </p>
+<h2 id="Advantages-2"><a href="#Advantages-2" class="headerlink" title="Advantages"></a>Advantages</h2><ul>
+<li>Ready-made templates</li>
+<li>Ready-made themes</li>
+<li>Ready-made plugins</li>
+<li>Tooling facilitates development process</li>
+<li>Caching is easy (content is static)</li>
+<li>High performance</li>
+<li>Markdown as a common language</li>
+<li>Markdown based content makes it simple to migrate</li>
+</ul>
+<h2 id="Disadvantages-2"><a href="#Disadvantages-2" class="headerlink" title="Disadvantages"></a>Disadvantages</h2><ul>
+<li>Initial stack setup and learning curve</li>
+<li><del>Tooling is still maturing (a far cry from a CMS WYSIWYG editor)</del></li>
+</ul>
+<p>Static Website Generators offer a great deal of benefits. There is a learning curve to them, primarily in terms of their initial setup and learning the Markdown syntax. They are not yet at a stage where they are as friendly as a CMS for the non-technical user. However they are growing in that direction. A beautiful example of this is the integrations between <a href="http://github.io" target="_blank" rel="external">github.io</a> and <a href="http://jekyllrb.com/" target="_blank" rel="external">Jekyll</a> which basically allows a user of github.io to create content by simply writing Markdown and committing it to GitHub. This then gets converted to HTML and published on github.io automatically. In the meantime, for those willing to put in the time to learn the ropes, there are great benefits to be had as I have hopefully managed to outline above.</p>
+<p><strong>UPDATE:</strong> In writing the follow-up to this blog post I found a new project linked from StaticGen called <a href="http://headlesscms.org" target="_blank" rel="external">headlessCMS</a> which provides a list of CMSs for <a href="http://jamstack.org" target="_blank" rel="external">JAMstack</a> Sites. These projects are basically intended to add another layer on top of a Static Website Generator in order to provide a traditional CMS-like experience. They’re bridging the gap between people with he required technical knowledge to use a Static Generator and people who are more accustomed to using a graphical CMS. I will definitely be looking at these in a future post and update you on my progress.</p>
+<p>I hope you’ve enjoyed this high-level introduction to Static Website Generators and why they are useful and that I have peaked your interest enough for you to want to try them out if you haven’t already. In my next blog post, I will follow this up with a hands-on tutorial on how I setup this blog using the <a href="http://hexo.io" target="_blank" rel="external">Hexo</a> Static Website Generator.</p>
+<p>Till next time…</p>
+]]></content>
+      
+        <categories>
+            
+            <category> Web Development </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Static Website Generators </tag>
+            
+            <tag> JavaScript </tag>
+            
+            <tag> HTML </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Getting Started with React-Redux]]></title>
+      <url>http://powell-christopher.github.io/2016/04/10/Getting-Started-with-React-Redux/</url>
+      <content type="html"><![CDATA[<p>In this article, we will dig through the details of my re-implementation of FaceBook’s React POC. I will go over the process of implementing this version of the POC, areas of importance, lessons learned, etc.</p>
+<p>The source code is available <a href="https://github.com/powell-christopher/react-tutorial-using-brunch-react-redux" target="_blank" rel="external">here</a>.</p>
+<a id="more"></a>
+<p>Continuing on from my previous blog post, my objective for this POC was to re-implement React’s <a href="https://facebook.github.io/react/docs/tutorial.html" target="_blank" rel="external">Comment Box tutorial</a> using Redux as a replacement for React State. If you have not yet gone through the tutorial, I would highly recommend that you do so as it is highly informative and I will be assuming that prior knowledge. My implementation will be based on the static implementation of that tutorial.</p>
+<p>First things first…I wanted a scaffolding tool to get me started with my node based project. I was a bit rusty on node scaffolding tooling having only really had experience with <a href="http://yeoman.io/" target="_blank" rel="external">Yoeman</a> in the past. So I decided to have a look around, see what’s new and experiment a bit. In doing so, I discovered <a href="http://brunch.io/" target="_blank" rel="external">Brunch</a>. Brunch is actually one of the oldest players in the scaffolding game. What I liked about it is its simplicity. </p>
+<p>If you already have node.js installed, installation is a doddle:</p>
+<figure class="highlight plain"><figcaption><span>Brunch.io setup</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g brunch</div></pre></td></tr></table></figure>
+<p>Once brunch is installed, it offers a CLI that allows you to get going very easily. Ultimately the CLI will create JSON based configuration which, should you choose to, can also be easily manipulated directly.</p>
+<p>What I really liked about it though is the concept of <em>skeletons</em>. A <em>skeleton</em> is basically just a boiler plate project. If you decide to build your project based on a <em>skeleton</em>, brunch will just download that <em>skeleton</em> for you, customize it based on your parameters, and off you go. All required dependencies are included out of the box. No messing around. It just works. Obviously, such a mechanism is not as powerful or flexible as what other frameworks offer, but Brunch has an extensive list of <em>skeletons</em> on offer. Chances are they have exactly what you’re looking for. In my case, I picked the <a href="https://github.com/brunch/with-redux" target="_blank" rel="external">React+Redux Skeleton</a> and it was a great starting point.</p>
+<p>The project is laid out as follows:</p>
+<ul>
+<li>actions</li>
+<li>assets</li>
+<li>components</li>
+<li>drivers</li>
+<li>reducers</li>
+<li>styles</li>
+<li>initialize.js</li>
+</ul>
+<p>Lets start breaking this down…</p>
+<p>The <em>assets</em> folder contains my web assets. All I have there is my <em>index.html</em> file. Our starting point. This HTML page just acts as a container for <em>initialize.js</em>, which is where things really start kicking off. This is where we find our <em>ReactDom.render()</em> call to which we pass JSX that pulls in a couple of components, namely <em>WelcomeMessage</em> and <em>CommentBox</em>.</p>
+<p>Our components can be found in the <em>components</em> folder. <em>WelcomeMessage</em> is a purely static component. As simple as it gets. Just a <em>render</em> call with some JSX inside. <em>CommentBox</em> is a bit more elaborate but it is largely based on the React Tutorial. Once again we have a <em>render</em> method with some JSX which this time includes the <em>CommentList</em> and <em>CommentForm</em> components. <em>CommentList</em> expects a map of comments to render using the <em>Comment</em> component, whereas <em>CommentForm</em> expects a function to be called on Form Submit. </p>
+<p>So far, so good, so static…</p>
+<p>For now, we have a nice logical segregation of our UI components and little else. If we continue on the footsteps of the original React tutorial, this is where we would introduce React State. Unfortunately that has the effect of introducing <em>setState</em> and <em>getState</em> methods all over our components making readability and maintainability suffer.</p>
+<p>This is where <a href="http://redux.js.org/" target="_blank" rel="external">Redux</a> comes in…</p>
+<p>So what is Redux? To quote their website, it is a “predictable state container for JavaScript apps”. In Redux, the state of the whole application is maintained in a single <em>store</em> as an object tree. The only way the store can be modified is through the emitting of an <em>action</em>. The <em>action</em> is handled by a <em>reducer</em> which will itself modify the <em>store</em>. All this should sound pretty standard to anyone used to event based systems in higher level languages. It was however incredibly exciting for me to find this same paradigm in the JavaScript world.</p>
+<p>So how does Redux fit into our tutorial code? Very neatly it turns out :) The Redux team have even seen fit to create a library for the easy integration of React and Redux, intuitively named <em>react-redux</em>. Let’s continue…</p>
+<p>Going back to <em>initialize.js</em>, we import <em>redux</em> and <em>react-redux</em>. We then create our store via the <em>createStore</em> command. We’re creating the store here at the very topmost layer since as previously mentioned, we will have a single store maintaining the state of the whole application. Next we modify our JSX and we wrap our <em>CommentBox</em> tag with a <em>Provider</em> tag which accepts our store object as a parameter.</p>
+<figure class="highlight javascript"><figcaption><span>Store setup</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> store = createStore(commentsReducer);</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><figcaption><span>Provider setup</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;Provider store=&#123; store &#125;&gt;</div><div class="line">	&lt;CommentBox url="/api/comments" pollInterval=&#123;2000&#125; /&gt;</div><div class="line">&lt;/Provider&gt;</div></pre></td></tr></table></figure>
+<p>The <em>Provider</em> tag comes from <em>react-redux</em>. It will make the Redux <em>store</em> available within the context of all React based components that are wrapped by the <em>Provider</em> tag, including any other components that are pulled in further down the chain of JSX based React <em>render</em> methods. At this point we can pull our React Props from the Redux store via a <em>store.getState().PROP_NAME</em> call. Note that if we have a look at <em>CommentBox</em>, this is being done within the <em>render</em> method and the Props are handled as constants just like any standard React Prop. Another thing to notice is that all the changes required for the introduction of the Redux Store into the application are isolated within <em>initialize.js</em> and <em>CommentBox</em> (my top level component). The rest of the application is unaffected. This allows for a nice evolutionary transition from a static React Prop based application to a dynamic, event-based application.</p>
+<figure class="highlight javascript"><figcaption><span>Using the store</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> &#123; store &#125; = <span class="keyword">this</span>.context;</div><div class="line"><span class="keyword">const</span> &#123; getState &#125; = store;</div><div class="line"><span class="keyword">const</span> &#123; comments &#125; = getState();</div></pre></td></tr></table></figure>
+<p>Now that we have our Redux integration, we need to start manipulating the store via <em>actions</em> and <em>reducers</em>.</p>
+<p>Starting with <em>actions</em>, I created <em>CommentActions</em> and thought “Which actions or events does my application need to handle?”. I thus created my two actions, SUBMIT_COMMENT and RECEIVE_COMMENTS. I then proceeded to create a function representing each one. The relevant function will have as parameter the intended payload for the action and it will return an object which defines one of the actions we just created as its <em>type</em> and a data payload. In my case, the payload passed to the action is the same one the action passes along as its payload. However, one could have some business logic in here which modifies the payload somehow.</p>
+<figure class="highlight javascript"><figcaption><span>Actions</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// redux actions defined as const of type Symbol</span></div><div class="line"><span class="keyword">export</span> <span class="keyword">const</span> SUBMIT_COMMENT   = <span class="built_in">Symbol</span>(<span class="string">'SUBMIT_COMMENT'</span>);</div><div class="line"><span class="keyword">export</span> <span class="keyword">const</span> RECEIVE_COMMENTS = <span class="built_in">Symbol</span>(<span class="string">'RECEIVE_COMMENTS'</span>);</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line">  submitComment</div><div class="line">  Defines payload for events of type SUBMIT_COMMENT</div><div class="line">**/</div><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">submitComment</span>(<span class="params">comment</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> &#123;</div><div class="line">    <span class="attr">type</span>: SUBMIT_COMMENT,</div><div class="line">    comment</div><div class="line">  &#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line">	receiveComments</div><div class="line">	Defines payload for events of type RECEIVE_COMMENTS</div><div class="line">**/</div><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">receiveComments</span>(<span class="params">comments</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> &#123;</div><div class="line">    <span class="attr">type</span>: RECEIVE_COMMENTS,</div><div class="line">    comments</div><div class="line">  &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Now that we have <em>actions</em>, we need <em>reducers</em> to handle them. The <em>reducer</em> is responsible for altering the <em>store</em> based on the received <em>action</em>. In this case, we only have two <em>actions</em> to handle, so to keep things simple, we just  have a single <em>reducer</em> function which handles both via a switch statement. The <em>reducer</em> function will accept the current <em>store</em> and the <em>action</em> as parameters. It will then return the new <em>store</em>, which may or may not be identical to the previous version. In the case of SUBMIT_COMMENT we concat the new comment from the <em>action</em> payload to the current list of comments and then pass that along. For RECEIVE_COMMENTS we just pass the <em>action</em> payload out as the new list of comments. Notice that I also have a <em>default</em> option in the switch statement which just returns the current <em>store</em> as is. This is in case our <em>reducer</em> somehow receives an unhandled <em>action</em>. Notice that the <em>reducer</em> we have created is agnostic of the mechanism through which the <em>action</em> payload is obtained (i.e. the loading and submitting of comments on the server). The <em>reducer</em> only deals with the manipulation of the <em>store</em>.</p>
+<figure class="highlight javascript"><figcaption><span>Reducers</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">  CommentReducers</div><div class="line">  A Redux Reducer that can handle Comment Actions.</div><div class="line">  Given an existing State Tree and an Action, it will respond with a new State Tree.</div><div class="line">**/</div><div class="line"></div><div class="line"><span class="keyword">import</span> * <span class="keyword">as</span> commentActions <span class="keyword">from</span> <span class="string">'actions/CommentActions'</span>;</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">commentsReducer</span>(<span class="params">state=&#123;comments : []&#125;, action</span>) </span>&#123;</div><div class="line">  <span class="keyword">switch</span>(action.type)&#123;</div><div class="line">    <span class="keyword">case</span> commentActions.SUBMIT_COMMENT:</div><div class="line">      <span class="keyword">let</span> comments = state.comments.concat([action.comment]);</div><div class="line">      <span class="keyword">return</span> &#123;<span class="attr">comments</span> : comments&#125;;</div><div class="line">    <span class="keyword">case</span> commentActions.RECEIVE_COMMENTS:</div><div class="line">     <span class="keyword">return</span> &#123;<span class="attr">comments</span> : action.comments&#125;;</div><div class="line">    <span class="keyword">default</span>:</div><div class="line">      <span class="keyword">return</span> state;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Now that we have <em>actions</em> and <em>reducers</em> in place, lets put them to use. Going back to <em>CommentBox</em> we will use the <em>store</em> object which was made available to us by <em>react-redux</em>`s <em>Provider</em> tag to dispatch <em>actions</em> via the <em>dispatch</em> function. This takes as parameter the response from the <em>action</em> function we created earlier in <em>CommentActions</em>. Note however that this function in turn requires the <em>action</em> payload as a parameter, meaning it is now time to reach out to the server. However, we do not want to dirty our <em>CommentBox</em> component with the details of server interaction, so instead we create <em>CommentsDriver</em> which will be the sole entity responsible for this interaction. So <em>CommentBox</em> will obtain the current data through the use of <em>CommentDriver</em> and then dispatch <em>actions</em> against the Redux <em>store</em> which will be handled by our <em>reducer</em>, which in turn will manipulate the <em>store</em>, which is then fed back to our React components via <em>react-redux</em>.   </p>
+<figure class="highlight javascript"><figcaption><span>Dispatching actions from CommentBox.js</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">commentsAPI.fetchComments(<span class="keyword">this</span>.props.url)</div><div class="line">	.then(<span class="function">(<span class="params">comments</span>) =&gt;</span> &#123;</div><div class="line">		<span class="built_in">console</span>.log(comments);</div><div class="line">        store.dispatch( commentActions.receiveComments(comments) );</div><div class="line">	&#125;).catch(<span class="function">(<span class="params">error</span>) =&gt;</span> &#123;</div><div class="line">		<span class="built_in">console</span>.error(error);</div><div class="line">	&#125;);</div></pre></td></tr></table></figure>
+<p>An important thing to note, and something that escaped me at first, is that React components need to <em>subscribe</em> to <em>store</em> updates in order for the React context to be updated when the <em>store</em> changes. If you fail to do this, you will see <em>actions</em> being dispatched, <em>reducers</em> doing their job, but no visual change to the application. This is due to the fact that as a performance optimization, the React context will <em>not</em> be updated automatically unless the component specifically asks for the updates through a <em>subscribe</em> call. It is also good practice to <em>unsubscribe</em> before unloading a component. Also note that since our Redux <em>store</em> integration was confined to our top level <em>CommentBox</em> component, the <em>subscribe</em> and <em>unsubscribe</em> calls also only need to happen here. </p>
+<figure class="highlight javascript"><figcaption><span>Dispatching actions from CommentBox.js</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// componentDidMount is called automatically by React on mount of the component</span></div><div class="line"><span class="comment">// here we subscribe to redux store (to get updates) and we load comments from server</span></div><div class="line">componentDidMount() &#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'subscribing to redux store'</span>);</div><div class="line">  <span class="keyword">const</span> &#123; store &#125; = <span class="keyword">this</span>.context;</div><div class="line">  <span class="keyword">this</span>.unsubscribe = store.subscribe( <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">this</span>.forceUpdate() );</div><div class="line">  </div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'bootstrapping comment list'</span>);</div><div class="line">  <span class="keyword">this</span>.loadComments();</div><div class="line">  setInterval(<span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">this</span>.loadComments(), <span class="keyword">this</span>.props.pollInterval);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// componentWillUnmount is called automatically by React on unmount of the component</span></div><div class="line"><span class="comment">// here we cleanup by unsubscribing from the redux store</span></div><div class="line">componentWillUnmount() &#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'unsubscribing from redux store'</span>);</div><div class="line">  <span class="keyword">this</span>.unsubscribe(); </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>And there you have it…our application is now fully dynamic and event driven. Nice! :)</p>
+<p>In summary, I have found this approach to have a lot of advantages:</p>
+<ul>
+<li>React is giving us high modularity and re-usability of our components</li>
+<li>State is handled entirely by the Redux <em>store</em></li>
+<li>We have an event driven application thanks to the use of <em>actions</em> and <em>reducers</em></li>
+<li>Our <em>reducers</em> are only involved in the manipulation of the state <em>store</em> and nothing else</li>
+<li>All state <em>store</em> manipulation is localized within our <em>reducers</em></li>
+<li>Both our React components and our Redux code are completely agnostic of the details of server interaction thanks to our <em>drivers</em></li>
+<li>We have much better segregation of concerns then the dispersal of React State <em>getState</em> and <em>setState</em> throughput our components</li>
+<li>We moved from a static React Prop based application to a dynamic event driven application organically</li>
+</ul>
+<p>Of course this small POC can be further improved using a variety of related tooling. One example is the use of <a href="https://github.com/gaearon/redux-thunk" target="_blank" rel="external">redux-thunk</a> in order to have <em>actions</em> return functions allowing for the delayed dispatch of <em>actions</em>, the introduction of business logic to the <em>action</em>, asynchronous dispatch of <em>actions</em>, etc. My scope for this post however was to demonstrate a basic integration of React and Redux and clearly explain the players and processes involved. As I learn more about these technologies I may decide to revisit this and share my findings once more :)</p>
+<p>In the meantime, I hope you’ve enjoyed this little delve into React and Redux and hope you’ll give then a go.</p>
+<p>Till next time…</p>
+]]></content>
+      
+        <categories>
+            
+            <category> Web Development </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> JavaScript </tag>
+            
+            <tag> ES6 </tag>
+            
+            <tag> React </tag>
+            
+            <tag> Redux </tag>
+            
+            <tag> React-Redux </tag>
+            
+            <tag> Brunch </tag>
+            
+            <tag> node.js </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[React & Redux - Match made in heaven?]]></title>
+      <url>http://powell-christopher.github.io/2016/04/10/React-Redux-Match-made-in-heaven/</url>
+      <content type="html"><![CDATA[<p>In this article, I will discuss my recent introduction to Facebook’s <a href="https://facebook.github.io/react/index.html" target="_blank" rel="external">React</a>. What I liked about it,  what I didn’t and how <a href="http://redux.js.org/" target="_blank" rel="external">Redux</a> came to the rescue.</p>
+<a id="more"></a>
+<p>Recently I needed to do a small web UI project and I decided to refresh my knowledge of JavaScript technologies and frameworks. I noticed that a lot of people were using React so I decided to give it a go. Until recently my go-to UI framework had been AngularJS and I had grown quite comfortable with it. So I was interested to see what React brings to the table.</p>
+<p>As soon as I started reading about React, I was interested in a number of features it offers:</p>
+<ul>
+<li>It is very view focused and attempts to be agnostic of the rest of the stack</li>
+<li>It is designed to be fast (Virtual DOM, One way data-flow, etc.)</li>
+<li>Allows for easier modularity and re-use</li>
+</ul>
+<p>The moment I started experimenting with it, I was not so sure anymore. The idea of JSX and having what to my eyes were parts of the template within my JavaScript code seemed weird. However, as I delved deeper I really started to like the React approach. Specifically, I really liked the structured approach that React imposes on you. It allows you to think of building a UI in the same way you would think about splitting a project into differnet classes in a higher level object-oriented language. Moreover, it lends itself very much to building your UI via Evolutionary Prototyping, of which I am a big fan. If you haven’t done so already, I would strongly suggest going over the <a href="https://facebook.github.io/react/docs/thinking-in-react.html" target="_blank" rel="external">Thinking in React</a> article in the React documentation as it paints the picture I am describing very clearly.</p>
+<p>As I was following the <a href="https://facebook.github.io/react/docs/tutorial.html" target="_blank" rel="external">Comment Box tutorial</a> from the Redux documentation, I felt unsure once again. Whilst the use of static propTypes made perfect sense to me, I did not really like the code once React state was introduced. To my eyes, the breaking down of the Combo Box component into many classes (or subcomponents), which till just now I had loved, suddenly ended up being a double-edged sword because it was causing state manipulation to be spread over many classes as well. The code was still cohesive because each subcomponent would only manipulate its own state. However, whereas before the interface points between subcomponents were very clean, now they did not tell the full story because of the internal state manipulation. The Comment Box component still looked elegant from the outside, but from the inside, not so much.</p>
+<p>At that point, I read about how a lot of people that use React also use another technology called Redux. The Redux team themselves openly state that although React and Redux and not related to each other, and Redux can be used with a variety of other frameworks, they do fit very well together and Redux team actually provide an integration library called <em>react-redux</em> to make integration even easier.</p>
+<p>Redux calls itself a <em>state management library</em>. State is maintained in a <em>state tree</em> that is contained in a <em>store</em>. The most interesting aspect is that state can only be manipulated by emitting an <em>action</em>. Redux then employs pure <em>reducers</em> that manipulate the state tree based on the action object that describes what happened.</p>
+<p>This seemed like a perfect solution for my concern about having dispersed state manipulation in React code and I immediately got a sense of why so many people pair these two technologies together.</p>
+<p>My objective at this point was to modify the <a href="https://facebook.github.io/react/docs/tutorial.html" target="_blank" rel="external">React Comment Box tutorial</a> which I had just completed and leverage Redux to further clean-up my code. This ended up being not as straight forward as I had hoped. No doubt due to my being completely new to both React and Redux.</p>
+<p>Eventually, after a lot of reading and a lot of trial and error, I did manage to achieve my target, the sources for which are available <a href="https://github.com/powell-christopher/react-tutorial-using-brunch-react-redux" target="_blank" rel="external">here</a>.</p>
+<p>My main problem was that a lot of the material I found online was assuming a bit too much existing knowledge of these libraries. Knowledge which I was lacking. Also, I struggled to find a really simple explanation of how React and Redux fit together and what each library is trying to do.</p>
+<p>In my next blog post, I will go over how I managed to introduce Redux to the React Combo Box tutorial provided by Facebook. I will explain how this allowed me to considerably clean-up my code and make it much more readable and maintainable. I will also explain the basics of how React and Redux interact with each other to achieve the desired result.</p>
+]]></content>
+      
+        <categories>
+            
+            <category> Web Development </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> JavaScript </tag>
+            
+            <tag> React </tag>
+            
+            <tag> Redux </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Hello World]]></title>
+      <url>http://powell-christopher.github.io/2016/04/10/hello-world/</url>
+      <content type="html"><![CDATA[<p>Welcome to my Blog!</p>
+<p>Being an I.T. professional, I always had it in the back of my head to create a technical blog. Somehow I never got around to doing it. Until now! :)</p>
+<a id="more"></a>
+<p>Recently I decided to refresh my knowledge of JavaScript Front End technologies and this spurred me to kick-start this blog so I can share my lessons learned with the community.</p>
+<p>I hope you will find this useful and I look forward to some feedback!</p>
+<p>Thanks!</p>
+]]></content>
+      
+        
+    </entry>
+    
+  
+  
+</search>

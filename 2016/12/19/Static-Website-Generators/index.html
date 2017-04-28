@@ -1,0 +1,828 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Static Website Generators,JavaScript,HTML," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Christopher Powell" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="When I decided to start working on this blog, in my mind I had two options:  Write it RAW from the ground up Use a Content Management System (CMS) like WordPress or Joomla!  As usual I took a bit of a">
+<meta name="keywords" content="Static Website Generators,JavaScript,HTML">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Static Website Generators">
+<meta property="og:url" content="http://powell-christopher.github.io/2016/12/19/Static-Website-Generators/index.html">
+<meta property="og:site_name" content="Christopher Powell">
+<meta property="og:description" content="When I decided to start working on this blog, in my mind I had two options:  Write it RAW from the ground up Use a Content Management System (CMS) like WordPress or Joomla!  As usual I took a bit of a">
+<meta property="og:updated_time" content="2017-04-26T17:04:38.455Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Static Website Generators">
+<meta name="twitter:description" content="When I decided to start working on this blog, in my mind I had two options:  Write it RAW from the ground up Use a Content Management System (CMS) like WordPress or Joomla!  As usual I took a bit of a">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://powell-christopher.github.io/2016/12/19/Static-Website-Generators/"/>
+
+
+
+
+
+  <title>Static Website Generators | Christopher Powell</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-89193917-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Christopher Powell</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Adventures in Coding</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://powell-christopher.github.io/2016/12/19/Static-Website-Generators/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Christopher Powell">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/favicon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Christopher Powell">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Static Website Generators
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-19T14:55:35+00:00">
+                2016-12-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web-Development/" itemprop="url" rel="index">
+                    <span itemprop="name">Web Development</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>When I decided to start working on this blog, in my mind I had two options:</p>
+<ul>
+<li>Write it RAW from the ground up</li>
+<li>Use a Content Management System (CMS) like <a href="https://wordpress.org/" target="_blank" rel="external">WordPress</a> or <a href="https://www.joomla.org/" target="_blank" rel="external">Joomla!</a></li>
+</ul>
+<p>As usual I took a bit of a pause to investigate before getting stuck in and I thus bumped into Static Website Generators. Suffice to say, I never looked back.</p>
+<a id="more"></a>
+<p>So lets start by briefly discussing the advantages and disadvantages or rolling your own or using a CMS.</p>
+<h1 id="Rolling-your-own-website-blog"><a href="#Rolling-your-own-website-blog" class="headerlink" title="Rolling your own website/blog"></a>Rolling your own website/blog</h1><p>If you have the required skills, rolling your own may be the easiest way of getting something done quickly.</p>
+<h2 id="Advantages"><a href="#Advantages" class="headerlink" title="Advantages"></a>Advantages</h2><ul>
+<li>Exactly what you need. Nothing more. Nothing less.</li>
+<li>If you’re starting small, the amount of work needed may be relatively small</li>
+<li>If you already have the skills, you don’t need to learn a new tool or new system</li>
+<li>As custom as it gets</li>
+</ul>
+<h2 id="Disadvantages"><a href="#Disadvantages" class="headerlink" title="Disadvantages"></a>Disadvantages</h2><ul>
+<li>More work</li>
+<li>Error Prone</li>
+<li>First versions will probably be pretty bare bones</li>
+<li>Each new feature introduced will introduce new complexity</li>
+<li>Work load will get out of hand pretty quickly</li>
+</ul>
+<p>Rolling your own can be seen as the “traditional” approach to Web Development. As already discussed, things start getting complicated as you keep adding functionality. Stacks such as <a href="https://en.wikipedia.org/wiki/LAMP_%28software_bundle%29" target="_blank" rel="external">LAMP</a> were introduced to help developers get more done more quickly by offering a packaged client-server solution and code skeletons. Modern tooling such as node.js based scaffolding frameworks are based on similar concepts. They allow you to get going much faster and offer a tooling ecosystem but ultimately you are still responsible for your own codebase and the uptime and upkeep of you system.</p>
+<h1 id="Using-a-CMS"><a href="#Using-a-CMS" class="headerlink" title="Using a CMS"></a>Using a CMS</h1><p>Using a CMS such as <a href="https://wordpress.org/" target="_blank" rel="external">WordPress</a> or <a href="https://www.joomla.org/" target="_blank" rel="external">Joomla!</a> was the goto approach if you needed something pretty standard, but you also needed it done quickly, needed it to look good and needed a decent feature list.</p>
+<h2 id="Advantages-1"><a href="#Advantages-1" class="headerlink" title="Advantages"></a>Advantages</h2><ul>
+<li>Easy to get started</li>
+<li>Ready-made templates</li>
+<li>Ready-made themes</li>
+<li>Ready-made plugins</li>
+<li>Marketplace for quality, high end content</li>
+<li>UI based configuration</li>
+<li>Built-in WYSIWYG editors</li>
+</ul>
+<h2 id="Disadvantages-1"><a href="#Disadvantages-1" class="headerlink" title="Disadvantages"></a>Disadvantages</h2><ul>
+<li>May be overkill for you needs</li>
+<li>Slow</li>
+<li>As you install 3rd party templates, themes, plugins, etc. maintainability becomes a concern</li>
+<li>Learning curve</li>
+<li>Each new plugin installed introduces its own learning curve and dependencies</li>
+<li>Cumbersome management tooling</li>
+<li>Maintenance cost of keeping the CMS, plugins and dependencies up to date</li>
+<li>Migrating to a newer version can be challenging</li>
+<li>Migrating to a difference CMS may be difficult if not impossible</li>
+</ul>
+<p>A CMS allows you to get a lot done quickly. Using an intuitive UI, one can create the skeleton of his website based on ready-made themed templates and then get immediately into populating it with articles, etc. New features and capabilities can be easily added on via plugins. Popular CMS systems will also offer a marketplace for high quality, well supported, templates, plugins, etc. All this does come at a cost though. It may not be evident in the beginning but as the project grows, so too will the maintenance cost of keeping a system made up of disparate 3rd party plugins ticking and up-to-date. This is especially important from a security standpoint. The popularity of the CMS will be directly proportional to how much work people put into finding its vulnerabilities. Even if the CMS project itself and plugins used are well supported and have frequent releases, dealing with the update process is a big maintenance cost. Typically this is also when you start hitting a performance wall.  </p>
+<h1 id="Why-Static-Website-Generators"><a href="#Why-Static-Website-Generators" class="headerlink" title="Why Static Website Generators?"></a>Why Static Website Generators?</h1><p>Static Website Generators are not a new idea. Referencing back to the “rolling your own” option, that’s how the earliest websites used to be; completely static. Eventually we got to a stage where the limitations of HTML forced developers to look at other tooling in order to augment its capabilities. Thus stacks like the previously discussed LAMP were born. Such stacks opened our eyes to the possibilities of dynamic content on websites and we basically never looked back. Fast forward to the modern Web 2.0 style web applications which have blurred the lines between web applications and native, desktop applications even further. Of course all this comes a the cost of server-side compute resources and stack complexity.</p>
+<p>The solution that we primarily adopt when it comes to circumventing the cost and attached latency of server-side computations is caching. One would typically try and split his content into static and dynamic content. The static part would be cached using a separate mechanism, possibly a third party CDN. In order to cache the dynamic content, one would need to adopt a more complex caching mechanism, one that will have to have some sort of cache invalidation mechanism. Cache invalidation is not a simple problem to solve. Add distributed caching to the mix and the issue becomes even more complex.</p>
+<p>One important consideration to make however, is whether the benefits of providing dynamic server content is worth the cost of admission. When it comes to complex web applications, the answer is most probably yes. However, for something that by its very nature is more static, like this very blog, then the answer might be a bit different.</p>
+<p>Moreover, opting for a static back-end nowadays does not impose the same limitations as it once did. The technology stacks in the front-end space have advanced tremendously in recent years. We’ve seen a great deal of advancement in web browsers and their JavaScript engines. We’ve seen advancement in HTML itself. We’ve seen a multitude of related tooling flourish. A lot of the capabilities that historically were exclusively offered in the realm of back-end services can nowadays be had via the inclusion of a simple JavaScript script. Thus, static generation and static content are no longer one and the same.</p>
+<p>Static Website Generators exist specifically to cater for this new growing trend. On websites such as <a href="https://www.staticgen.com/" target="_blank" rel="external">StaticGen</a> one may find a huge list of available static generators. In fact, because of the sheer amount of them, getting starting might seem difficult as different static website generators will be based on different programming languages and different template engines. There may also be differences in terms of which plugins they natively support, etc.</p>
+<p>The reality however is that a lot of them share a common denominator, <a href="http://daringfireball.net/projects/markdown/" target="_blank" rel="external">Markdown</a>. Markdown is a text to HTML engine that offers both an intuitive syntax and a tool to convert said syntax into HTML. Markdown is incredibly easy to read and write. In a modern static website generator, creating new content basically amounts to writing your content in Markdown, compiling it to HTML via the provided tooling, and uploading the content to your host server. Another perk is that since Markdown is a shared common denominator across different static website generators, one can easily migrate content from one to the other. The differences between different static generators will primarily only impact the average user on initial setup.  </p>
+<h2 id="Advantages-2"><a href="#Advantages-2" class="headerlink" title="Advantages"></a>Advantages</h2><ul>
+<li>Ready-made templates</li>
+<li>Ready-made themes</li>
+<li>Ready-made plugins</li>
+<li>Tooling facilitates development process</li>
+<li>Caching is easy (content is static)</li>
+<li>High performance</li>
+<li>Markdown as a common language</li>
+<li>Markdown based content makes it simple to migrate</li>
+</ul>
+<h2 id="Disadvantages-2"><a href="#Disadvantages-2" class="headerlink" title="Disadvantages"></a>Disadvantages</h2><ul>
+<li>Initial stack setup and learning curve</li>
+<li><del>Tooling is still maturing (a far cry from a CMS WYSIWYG editor)</del></li>
+</ul>
+<p>Static Website Generators offer a great deal of benefits. There is a learning curve to them, primarily in terms of their initial setup and learning the Markdown syntax. They are not yet at a stage where they are as friendly as a CMS for the non-technical user. However they are growing in that direction. A beautiful example of this is the integrations between <a href="http://github.io" target="_blank" rel="external">github.io</a> and <a href="http://jekyllrb.com/" target="_blank" rel="external">Jekyll</a> which basically allows a user of github.io to create content by simply writing Markdown and committing it to GitHub. This then gets converted to HTML and published on github.io automatically. In the meantime, for those willing to put in the time to learn the ropes, there are great benefits to be had as I have hopefully managed to outline above.</p>
+<p><strong>UPDATE:</strong> In writing the follow-up to this blog post I found a new project linked from StaticGen called <a href="http://headlesscms.org" target="_blank" rel="external">headlessCMS</a> which provides a list of CMSs for <a href="http://jamstack.org" target="_blank" rel="external">JAMstack</a> Sites. These projects are basically intended to add another layer on top of a Static Website Generator in order to provide a traditional CMS-like experience. They’re bridging the gap between people with he required technical knowledge to use a Static Generator and people who are more accustomed to using a graphical CMS. I will definitely be looking at these in a future post and update you on my progress.</p>
+<p>I hope you’ve enjoyed this high-level introduction to Static Website Generators and why they are useful and that I have peaked your interest enough for you to want to try them out if you haven’t already. In my next blog post, I will follow this up with a hands-on tutorial on how I setup this blog using the <a href="http://hexo.io" target="_blank" rel="external">Hexo</a> Static Website Generator.</p>
+<p>Till next time…</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Static-Website-Generators/" rel="tag"># Static Website Generators</a>
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+            <a href="/tags/HTML/" rel="tag"># HTML</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/27/Getting-Started-with-Hexo.io/" rel="next" title="Getting started with Hexo.io">
+                <i class="fa fa-chevron-left"></i> Getting started with Hexo.io
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/04/10/Getting-Started-with-React-Redux/" rel="prev" title="Getting Started with React-Redux">
+                Getting Started with React-Redux <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/favicon.png"
+               alt="Christopher Powell" />
+          <p class="site-author-name" itemprop="name">Christopher Powell</p>
+           
+              <p class="site-description motion-element" itemprop="description">Technical lessons learned to share with the community</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/powell-christopher" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://mt.linkedin.com/in/chrispo" target="_blank" title="LinkedIn">
+                  
+                    <i class="fa fa-fw fa-linkedin"></i>
+                  
+                  LinkedIn
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Rolling-your-own-website-blog"><span class="nav-number">1.</span> <span class="nav-text">Rolling your own website/blog</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Advantages"><span class="nav-number">1.1.</span> <span class="nav-text">Advantages</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Disadvantages"><span class="nav-number">1.2.</span> <span class="nav-text">Disadvantages</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Using-a-CMS"><span class="nav-number">2.</span> <span class="nav-text">Using a CMS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Advantages-1"><span class="nav-number">2.1.</span> <span class="nav-text">Advantages</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Disadvantages-1"><span class="nav-number">2.2.</span> <span class="nav-text">Disadvantages</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Why-Static-Website-Generators"><span class="nav-number">3.</span> <span class="nav-text">Why Static Website Generators?</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Advantages-2"><span class="nav-number">3.1.</span> <span class="nav-text">Advantages</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Disadvantages-2"><span class="nav-number">3.2.</span> <span class="nav-text">Disadvantages</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Christopher Powell</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

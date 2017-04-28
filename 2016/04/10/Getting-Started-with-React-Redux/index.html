@@ -1,0 +1,798 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="JavaScript,ES6,React,Redux,React-Redux,Brunch,node.js," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Christopher Powell" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="In this article, we will dig through the details of my re-implementation of FaceBook’s React POC. I will go over the process of implementing this version of the POC, areas of importance, lessons learn">
+<meta name="keywords" content="JavaScript,ES6,React,Redux,React-Redux,Brunch,node.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Getting Started with React-Redux">
+<meta property="og:url" content="http://powell-christopher.github.io/2016/04/10/Getting-Started-with-React-Redux/index.html">
+<meta property="og:site_name" content="Christopher Powell">
+<meta property="og:description" content="In this article, we will dig through the details of my re-implementation of FaceBook’s React POC. I will go over the process of implementing this version of the POC, areas of importance, lessons learn">
+<meta property="og:updated_time" content="2017-04-26T17:04:38.451Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Getting Started with React-Redux">
+<meta name="twitter:description" content="In this article, we will dig through the details of my re-implementation of FaceBook’s React POC. I will go over the process of implementing this version of the POC, areas of importance, lessons learn">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://powell-christopher.github.io/2016/04/10/Getting-Started-with-React-Redux/"/>
+
+
+
+
+
+  <title>Getting Started with React-Redux | Christopher Powell</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-89193917-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Christopher Powell</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Adventures in Coding</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://powell-christopher.github.io/2016/04/10/Getting-Started-with-React-Redux/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Christopher Powell">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/favicon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Christopher Powell">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Getting Started with React-Redux
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-04-10T19:29:02+00:00">
+                2016-04-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web-Development/" itemprop="url" rel="index">
+                    <span itemprop="name">Web Development</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>In this article, we will dig through the details of my re-implementation of FaceBook’s React POC. I will go over the process of implementing this version of the POC, areas of importance, lessons learned, etc.</p>
+<p>The source code is available <a href="https://github.com/powell-christopher/react-tutorial-using-brunch-react-redux" target="_blank" rel="external">here</a>.</p>
+<a id="more"></a>
+<p>Continuing on from my previous blog post, my objective for this POC was to re-implement React’s <a href="https://facebook.github.io/react/docs/tutorial.html" target="_blank" rel="external">Comment Box tutorial</a> using Redux as a replacement for React State. If you have not yet gone through the tutorial, I would highly recommend that you do so as it is highly informative and I will be assuming that prior knowledge. My implementation will be based on the static implementation of that tutorial.</p>
+<p>First things first…I wanted a scaffolding tool to get me started with my node based project. I was a bit rusty on node scaffolding tooling having only really had experience with <a href="http://yeoman.io/" target="_blank" rel="external">Yoeman</a> in the past. So I decided to have a look around, see what’s new and experiment a bit. In doing so, I discovered <a href="http://brunch.io/" target="_blank" rel="external">Brunch</a>. Brunch is actually one of the oldest players in the scaffolding game. What I liked about it is its simplicity. </p>
+<p>If you already have node.js installed, installation is a doddle:</p>
+<figure class="highlight plain"><figcaption><span>Brunch.io setup</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g brunch</div></pre></td></tr></table></figure>
+<p>Once brunch is installed, it offers a CLI that allows you to get going very easily. Ultimately the CLI will create JSON based configuration which, should you choose to, can also be easily manipulated directly.</p>
+<p>What I really liked about it though is the concept of <em>skeletons</em>. A <em>skeleton</em> is basically just a boiler plate project. If you decide to build your project based on a <em>skeleton</em>, brunch will just download that <em>skeleton</em> for you, customize it based on your parameters, and off you go. All required dependencies are included out of the box. No messing around. It just works. Obviously, such a mechanism is not as powerful or flexible as what other frameworks offer, but Brunch has an extensive list of <em>skeletons</em> on offer. Chances are they have exactly what you’re looking for. In my case, I picked the <a href="https://github.com/brunch/with-redux" target="_blank" rel="external">React+Redux Skeleton</a> and it was a great starting point.</p>
+<p>The project is laid out as follows:</p>
+<ul>
+<li>actions</li>
+<li>assets</li>
+<li>components</li>
+<li>drivers</li>
+<li>reducers</li>
+<li>styles</li>
+<li>initialize.js</li>
+</ul>
+<p>Lets start breaking this down…</p>
+<p>The <em>assets</em> folder contains my web assets. All I have there is my <em>index.html</em> file. Our starting point. This HTML page just acts as a container for <em>initialize.js</em>, which is where things really start kicking off. This is where we find our <em>ReactDom.render()</em> call to which we pass JSX that pulls in a couple of components, namely <em>WelcomeMessage</em> and <em>CommentBox</em>.</p>
+<p>Our components can be found in the <em>components</em> folder. <em>WelcomeMessage</em> is a purely static component. As simple as it gets. Just a <em>render</em> call with some JSX inside. <em>CommentBox</em> is a bit more elaborate but it is largely based on the React Tutorial. Once again we have a <em>render</em> method with some JSX which this time includes the <em>CommentList</em> and <em>CommentForm</em> components. <em>CommentList</em> expects a map of comments to render using the <em>Comment</em> component, whereas <em>CommentForm</em> expects a function to be called on Form Submit. </p>
+<p>So far, so good, so static…</p>
+<p>For now, we have a nice logical segregation of our UI components and little else. If we continue on the footsteps of the original React tutorial, this is where we would introduce React State. Unfortunately that has the effect of introducing <em>setState</em> and <em>getState</em> methods all over our components making readability and maintainability suffer.</p>
+<p>This is where <a href="http://redux.js.org/" target="_blank" rel="external">Redux</a> comes in…</p>
+<p>So what is Redux? To quote their website, it is a “predictable state container for JavaScript apps”. In Redux, the state of the whole application is maintained in a single <em>store</em> as an object tree. The only way the store can be modified is through the emitting of an <em>action</em>. The <em>action</em> is handled by a <em>reducer</em> which will itself modify the <em>store</em>. All this should sound pretty standard to anyone used to event based systems in higher level languages. It was however incredibly exciting for me to find this same paradigm in the JavaScript world.</p>
+<p>So how does Redux fit into our tutorial code? Very neatly it turns out :) The Redux team have even seen fit to create a library for the easy integration of React and Redux, intuitively named <em>react-redux</em>. Let’s continue…</p>
+<p>Going back to <em>initialize.js</em>, we import <em>redux</em> and <em>react-redux</em>. We then create our store via the <em>createStore</em> command. We’re creating the store here at the very topmost layer since as previously mentioned, we will have a single store maintaining the state of the whole application. Next we modify our JSX and we wrap our <em>CommentBox</em> tag with a <em>Provider</em> tag which accepts our store object as a parameter.</p>
+<figure class="highlight javascript"><figcaption><span>Store setup</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> store = createStore(commentsReducer);</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><figcaption><span>Provider setup</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;Provider store=&#123; store &#125;&gt;</div><div class="line">	&lt;CommentBox url="/api/comments" pollInterval=&#123;2000&#125; /&gt;</div><div class="line">&lt;/Provider&gt;</div></pre></td></tr></table></figure>
+<p>The <em>Provider</em> tag comes from <em>react-redux</em>. It will make the Redux <em>store</em> available within the context of all React based components that are wrapped by the <em>Provider</em> tag, including any other components that are pulled in further down the chain of JSX based React <em>render</em> methods. At this point we can pull our React Props from the Redux store via a <em>store.getState().PROP_NAME</em> call. Note that if we have a look at <em>CommentBox</em>, this is being done within the <em>render</em> method and the Props are handled as constants just like any standard React Prop. Another thing to notice is that all the changes required for the introduction of the Redux Store into the application are isolated within <em>initialize.js</em> and <em>CommentBox</em> (my top level component). The rest of the application is unaffected. This allows for a nice evolutionary transition from a static React Prop based application to a dynamic, event-based application.</p>
+<figure class="highlight javascript"><figcaption><span>Using the store</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> &#123; store &#125; = <span class="keyword">this</span>.context;</div><div class="line"><span class="keyword">const</span> &#123; getState &#125; = store;</div><div class="line"><span class="keyword">const</span> &#123; comments &#125; = getState();</div></pre></td></tr></table></figure>
+<p>Now that we have our Redux integration, we need to start manipulating the store via <em>actions</em> and <em>reducers</em>.</p>
+<p>Starting with <em>actions</em>, I created <em>CommentActions</em> and thought “Which actions or events does my application need to handle?”. I thus created my two actions, SUBMIT_COMMENT and RECEIVE_COMMENTS. I then proceeded to create a function representing each one. The relevant function will have as parameter the intended payload for the action and it will return an object which defines one of the actions we just created as its <em>type</em> and a data payload. In my case, the payload passed to the action is the same one the action passes along as its payload. However, one could have some business logic in here which modifies the payload somehow.</p>
+<figure class="highlight javascript"><figcaption><span>Actions</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// redux actions defined as const of type Symbol</span></div><div class="line"><span class="keyword">export</span> <span class="keyword">const</span> SUBMIT_COMMENT   = <span class="built_in">Symbol</span>(<span class="string">'SUBMIT_COMMENT'</span>);</div><div class="line"><span class="keyword">export</span> <span class="keyword">const</span> RECEIVE_COMMENTS = <span class="built_in">Symbol</span>(<span class="string">'RECEIVE_COMMENTS'</span>);</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line">  submitComment</div><div class="line">  Defines payload for events of type SUBMIT_COMMENT</div><div class="line">**/</div><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">submitComment</span>(<span class="params">comment</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> &#123;</div><div class="line">    <span class="attr">type</span>: SUBMIT_COMMENT,</div><div class="line">    comment</div><div class="line">  &#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line">	receiveComments</div><div class="line">	Defines payload for events of type RECEIVE_COMMENTS</div><div class="line">**/</div><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">receiveComments</span>(<span class="params">comments</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> &#123;</div><div class="line">    <span class="attr">type</span>: RECEIVE_COMMENTS,</div><div class="line">    comments</div><div class="line">  &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Now that we have <em>actions</em>, we need <em>reducers</em> to handle them. The <em>reducer</em> is responsible for altering the <em>store</em> based on the received <em>action</em>. In this case, we only have two <em>actions</em> to handle, so to keep things simple, we just  have a single <em>reducer</em> function which handles both via a switch statement. The <em>reducer</em> function will accept the current <em>store</em> and the <em>action</em> as parameters. It will then return the new <em>store</em>, which may or may not be identical to the previous version. In the case of SUBMIT_COMMENT we concat the new comment from the <em>action</em> payload to the current list of comments and then pass that along. For RECEIVE_COMMENTS we just pass the <em>action</em> payload out as the new list of comments. Notice that I also have a <em>default</em> option in the switch statement which just returns the current <em>store</em> as is. This is in case our <em>reducer</em> somehow receives an unhandled <em>action</em>. Notice that the <em>reducer</em> we have created is agnostic of the mechanism through which the <em>action</em> payload is obtained (i.e. the loading and submitting of comments on the server). The <em>reducer</em> only deals with the manipulation of the <em>store</em>.</p>
+<figure class="highlight javascript"><figcaption><span>Reducers</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">  CommentReducers</div><div class="line">  A Redux Reducer that can handle Comment Actions.</div><div class="line">  Given an existing State Tree and an Action, it will respond with a new State Tree.</div><div class="line">**/</div><div class="line"></div><div class="line"><span class="keyword">import</span> * <span class="keyword">as</span> commentActions <span class="keyword">from</span> <span class="string">'actions/CommentActions'</span>;</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">commentsReducer</span>(<span class="params">state=&#123;comments : []&#125;, action</span>) </span>&#123;</div><div class="line">  <span class="keyword">switch</span>(action.type)&#123;</div><div class="line">    <span class="keyword">case</span> commentActions.SUBMIT_COMMENT:</div><div class="line">      <span class="keyword">let</span> comments = state.comments.concat([action.comment]);</div><div class="line">      <span class="keyword">return</span> &#123;<span class="attr">comments</span> : comments&#125;;</div><div class="line">    <span class="keyword">case</span> commentActions.RECEIVE_COMMENTS:</div><div class="line">     <span class="keyword">return</span> &#123;<span class="attr">comments</span> : action.comments&#125;;</div><div class="line">    <span class="keyword">default</span>:</div><div class="line">      <span class="keyword">return</span> state;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Now that we have <em>actions</em> and <em>reducers</em> in place, lets put them to use. Going back to <em>CommentBox</em> we will use the <em>store</em> object which was made available to us by <em>react-redux</em>`s <em>Provider</em> tag to dispatch <em>actions</em> via the <em>dispatch</em> function. This takes as parameter the response from the <em>action</em> function we created earlier in <em>CommentActions</em>. Note however that this function in turn requires the <em>action</em> payload as a parameter, meaning it is now time to reach out to the server. However, we do not want to dirty our <em>CommentBox</em> component with the details of server interaction, so instead we create <em>CommentsDriver</em> which will be the sole entity responsible for this interaction. So <em>CommentBox</em> will obtain the current data through the use of <em>CommentDriver</em> and then dispatch <em>actions</em> against the Redux <em>store</em> which will be handled by our <em>reducer</em>, which in turn will manipulate the <em>store</em>, which is then fed back to our React components via <em>react-redux</em>.   </p>
+<figure class="highlight javascript"><figcaption><span>Dispatching actions from CommentBox.js</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">commentsAPI.fetchComments(<span class="keyword">this</span>.props.url)</div><div class="line">	.then(<span class="function">(<span class="params">comments</span>) =&gt;</span> &#123;</div><div class="line">		<span class="built_in">console</span>.log(comments);</div><div class="line">        store.dispatch( commentActions.receiveComments(comments) );</div><div class="line">	&#125;).catch(<span class="function">(<span class="params">error</span>) =&gt;</span> &#123;</div><div class="line">		<span class="built_in">console</span>.error(error);</div><div class="line">	&#125;);</div></pre></td></tr></table></figure>
+<p>An important thing to note, and something that escaped me at first, is that React components need to <em>subscribe</em> to <em>store</em> updates in order for the React context to be updated when the <em>store</em> changes. If you fail to do this, you will see <em>actions</em> being dispatched, <em>reducers</em> doing their job, but no visual change to the application. This is due to the fact that as a performance optimization, the React context will <em>not</em> be updated automatically unless the component specifically asks for the updates through a <em>subscribe</em> call. It is also good practice to <em>unsubscribe</em> before unloading a component. Also note that since our Redux <em>store</em> integration was confined to our top level <em>CommentBox</em> component, the <em>subscribe</em> and <em>unsubscribe</em> calls also only need to happen here. </p>
+<figure class="highlight javascript"><figcaption><span>Dispatching actions from CommentBox.js</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// componentDidMount is called automatically by React on mount of the component</span></div><div class="line"><span class="comment">// here we subscribe to redux store (to get updates) and we load comments from server</span></div><div class="line">componentDidMount() &#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'subscribing to redux store'</span>);</div><div class="line">  <span class="keyword">const</span> &#123; store &#125; = <span class="keyword">this</span>.context;</div><div class="line">  <span class="keyword">this</span>.unsubscribe = store.subscribe( <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">this</span>.forceUpdate() );</div><div class="line">  </div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'bootstrapping comment list'</span>);</div><div class="line">  <span class="keyword">this</span>.loadComments();</div><div class="line">  setInterval(<span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">this</span>.loadComments(), <span class="keyword">this</span>.props.pollInterval);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// componentWillUnmount is called automatically by React on unmount of the component</span></div><div class="line"><span class="comment">// here we cleanup by unsubscribing from the redux store</span></div><div class="line">componentWillUnmount() &#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'unsubscribing from redux store'</span>);</div><div class="line">  <span class="keyword">this</span>.unsubscribe(); </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>And there you have it…our application is now fully dynamic and event driven. Nice! :)</p>
+<p>In summary, I have found this approach to have a lot of advantages:</p>
+<ul>
+<li>React is giving us high modularity and re-usability of our components</li>
+<li>State is handled entirely by the Redux <em>store</em></li>
+<li>We have an event driven application thanks to the use of <em>actions</em> and <em>reducers</em></li>
+<li>Our <em>reducers</em> are only involved in the manipulation of the state <em>store</em> and nothing else</li>
+<li>All state <em>store</em> manipulation is localized within our <em>reducers</em></li>
+<li>Both our React components and our Redux code are completely agnostic of the details of server interaction thanks to our <em>drivers</em></li>
+<li>We have much better segregation of concerns then the dispersal of React State <em>getState</em> and <em>setState</em> throughput our components</li>
+<li>We moved from a static React Prop based application to a dynamic event driven application organically</li>
+</ul>
+<p>Of course this small POC can be further improved using a variety of related tooling. One example is the use of <a href="https://github.com/gaearon/redux-thunk" target="_blank" rel="external">redux-thunk</a> in order to have <em>actions</em> return functions allowing for the delayed dispatch of <em>actions</em>, the introduction of business logic to the <em>action</em>, asynchronous dispatch of <em>actions</em>, etc. My scope for this post however was to demonstrate a basic integration of React and Redux and clearly explain the players and processes involved. As I learn more about these technologies I may decide to revisit this and share my findings once more :)</p>
+<p>In the meantime, I hope you’ve enjoyed this little delve into React and Redux and hope you’ll give then a go.</p>
+<p>Till next time…</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+            <a href="/tags/ES6/" rel="tag"># ES6</a>
+          
+            <a href="/tags/React/" rel="tag"># React</a>
+          
+            <a href="/tags/Redux/" rel="tag"># Redux</a>
+          
+            <a href="/tags/React-Redux/" rel="tag"># React-Redux</a>
+          
+            <a href="/tags/Brunch/" rel="tag"># Brunch</a>
+          
+            <a href="/tags/node-js/" rel="tag"># node.js</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/19/Static-Website-Generators/" rel="next" title="Static Website Generators">
+                <i class="fa fa-chevron-left"></i> Static Website Generators
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/04/10/React-Redux-Match-made-in-heaven/" rel="prev" title="React & Redux - Match made in heaven?">
+                React & Redux - Match made in heaven? <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/favicon.png"
+               alt="Christopher Powell" />
+          <p class="site-author-name" itemprop="name">Christopher Powell</p>
+           
+              <p class="site-description motion-element" itemprop="description">Technical lessons learned to share with the community</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/powell-christopher" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://mt.linkedin.com/in/chrispo" target="_blank" title="LinkedIn">
+                  
+                    <i class="fa fa-fw fa-linkedin"></i>
+                  
+                  LinkedIn
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Christopher Powell</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

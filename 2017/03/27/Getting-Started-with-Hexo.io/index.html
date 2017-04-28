@@ -1,0 +1,855 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Static Website Generators,Hexo.io,Markdown," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Christopher Powell" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="In this article I will run you through the process of setting up this blog using the Hexo Static Website Generator.">
+<meta name="keywords" content="Static Website Generators,Hexo.io,Markdown">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Getting started with Hexo.io">
+<meta property="og:url" content="http://powell-christopher.github.io/2017/03/27/Getting-Started-with-Hexo.io/index.html">
+<meta property="og:site_name" content="Christopher Powell">
+<meta property="og:description" content="In this article I will run you through the process of setting up this blog using the Hexo Static Website Generator.">
+<meta property="og:updated_time" content="2017-04-27T13:14:27.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Getting started with Hexo.io">
+<meta name="twitter:description" content="In this article I will run you through the process of setting up this blog using the Hexo Static Website Generator.">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://powell-christopher.github.io/2017/03/27/Getting-Started-with-Hexo.io/"/>
+
+
+
+
+
+  <title>Getting started with Hexo.io | Christopher Powell</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-89193917-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Christopher Powell</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Adventures in Coding</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://powell-christopher.github.io/2017/03/27/Getting-Started-with-Hexo.io/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Christopher Powell">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/favicon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Christopher Powell">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Getting started with Hexo.io
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-27T20:00:00+02:00">
+                2017-03-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web-Development/" itemprop="url" rel="index">
+                    <span itemprop="name">Web Development</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>In this article I will run you through the process of setting up this blog using the <a href="http://hexo.io" target="_blank" rel="external">Hexo</a> Static Website Generator.</p>
+<a id="more"></a>
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>This blog is hosted on <a href="http://github.io" target="_blank" rel="external">GitHub Pages</a> which offers free hosting of your content stored on your <a href="http://github.com" target="_blank" rel="external">GitHub Repository</a>.</p>
+<p>For anyone starting out and planning to host his content on GitHub Pages, I would recommend using their inbuilt <a href="http://jekyllrb.com" target="_blank" rel="external">Jekyll</a> integration. This will automatically create a skeleton Jekyll project for you and store it on your GitHub account. You can then manage your project as per usual using GitHub and have your content generated and deployed automatically for you via the Jekyll integration.</p>
+<p>When I first started working on this blog, I was not yet committed to hosting it on GitHub Pages, plus the Jekyll integration was not yet there. I thus setup my own Static Website Generator and eventually deployed to GitHub Pages. I also decided to follow a similar paradigm and host the sources to my website on GitHub as well. Whether you plan to setup your own Static Website Generator in order to host your website somewhere other than GitHub Pages, or whether you are doing this just to learn more about Static Website Generation, I still feel that this is an interesting exercise and I learned a lot whilst doing it.</p>
+<h2 id="Choosing-a-Static-Website-Generator"><a href="#Choosing-a-Static-Website-Generator" class="headerlink" title="Choosing a Static Website Generator"></a>Choosing a Static Website Generator</h2><p>My hunt for a Static Website Generator started on <a href="https://www.staticgen.com/" target="_blank" rel="external">StaticGen</a>. Here I ended up choosing Hexo. My main reason for opting for Hexo in lieu of something more popular like Jekyll is that Hexo is based on Node.js whereas Jekyll is based on Ruby. I have some Node.js experience but no experience with Ruby. As already discussed in my introduction to Static Generators, this does not really impact the user experience. Both Generators use Markdown as a syntax for their content so their being based on different languages would really only have an impact at setup time. Seeing as my development machine had Node.js already setup, and not wanting to overload it with Ruby and its dependencies, I decided to opt for Hexo. Again, one big advantage of using Markdown as a common syntax is that I can very easily migrate my content to a different Static Generator should I wish to do so.</p>
+<h1 id="Hexo-Setup"><a href="#Hexo-Setup" class="headerlink" title="Hexo Setup"></a>Hexo Setup</h1><p>Installing Hexo is very straightforward. Being based on Node.js, you can install it easily using npm.</p>
+<figure class="highlight plain"><figcaption><span>Hexo setup</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g hexo-cli</div></pre></td></tr></table></figure>
+<h1 id="Project-Setup"><a href="#Project-Setup" class="headerlink" title="Project Setup"></a>Project Setup</h1><p>Once Hexo is successfully installed, creating a new project is also very easy.</p>
+<figure class="highlight plain"><figcaption><span>Project setup</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">hexo init blog</div><div class="line">cd blog</div><div class="line">npm install</div></pre></td></tr></table></figure>
+<p>The hexo init command will create a project within a folder matching the specified project name. This project will be based on a scaffold with the following structure:</p>
+<ul>
+<li>_config.xml</li>
+<li>package.json</li>
+<li>scaffolds</li>
+<li>source<ul>
+<li>_drafts</li>
+<li>_posts</li>
+</ul>
+</li>
+<li>themes</li>
+</ul>
+<p><strong>_config.xml</strong> holds the project configuration. You can get the full details on what is customizable <a href="http://hexo.io/docs/configuration.html" target="_blank" rel="external">here</a>.</p>
+<p><strong>package.json</strong> will contain the project dependencies as per any Node.js application.</p>
+<p><strong>scaffolds</strong> contains the file scaffolds used when creating new content.</p>
+<p><strong>source</strong> will contain the sources for our content written in Markdown.</p>
+<p><strong>themes</strong> will contain the file structure of any installed themes. The selected theme will get merged with our content at build time to produce our website.</p>
+<p>Running npm install will download and install any required dependencies of the project as define in <strong>package.json</strong>.</p>
+<h1 id="Basic-Project-Config"><a href="#Basic-Project-Config" class="headerlink" title="Basic Project Config"></a>Basic Project Config</h1><p>Let’s start with some very basic project configuration.</p>
+<p>If we open <strong>_config.xml</strong> for editing, we can start by customizing the most basic information pertaining to our new website project.</p>
+<figure class="highlight plain"><figcaption><span>_config.xml</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line"># Site</div><div class="line">title: Christopher Powell</div><div class="line">subtitle: Adventures in Coding</div><div class="line">description: Technical lessons learned to share with the community</div><div class="line">author: Christopher Powell</div><div class="line">language: en</div><div class="line">timezone: Europe/Malta</div><div class="line"></div><div class="line"># URL</div><div class="line">url: http://powell-christopher.github.io</div><div class="line">root: /</div><div class="line">permalink: :year/:month/:day/:title/</div><div class="line">permalink_defaults:</div><div class="line">...</div></pre></td></tr></table></figure>
+<h1 id="First-Test-Run"><a href="#First-Test-Run" class="headerlink" title="First Test Run"></a>First Test Run</h1><p>Hexo includes a server for local testing of our project. Doing a server run will automatically build our project if it has not already been built using the <strong>generate</strong> command.</p>
+<p>Let’s try that out now…</p>
+<figure class="highlight plain"><figcaption><span>Starting a local test server</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo server --draft --open</div></pre></td></tr></table></figure>
+<p>This should start our local test server and automatically kick up our default browser and point it to our new website for us. Pretty snazzy…</p>
+<p>The <strong>draft</strong> option makes any draft posts we may have visible. These are not made visible by default and are not included in a normal deployment of our website.</p>
+<p>The <strong>open</strong> option is what triggers the automatic loading of the website in our browser as a convenience.</p>
+<p>An added perk is BrowserSync support which allow the server to listen for changes to its sources and generate new content as we author our posts, meaning we will see our edits show up on our browser as we work without restarting the server. Awesome :)</p>
+<p><strong>Note:</strong> This only applies to sources. Things like changes in configuration, installation of new plugins or themes, etc. will still require a restart of the server.</p>
+<h1 id="Authoring-a-Post"><a href="#Authoring-a-Post" class="headerlink" title="Authoring a Post"></a>Authoring a Post</h1><p>Time to start working on our first post…</p>
+<figure class="highlight plain"><figcaption><span>Creating a new Post</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo new draft &quot;Hello World&quot;</div></pre></td></tr></table></figure>
+<p>Hexo will now create a skeleton for our new “Hello World” post using its current setup scaffolds. The above command will return the full path to the file representing the new post. We can now open this file for editing and start working on it. As previously discussed, the syntax used is Markdown. For help in getting started with Markdown please refer to the documentation <a href="http://daringfireball.net/projects/markdown/" target="_blank" rel="external">here</a>.</p>
+<p>Remember that as we’re editing we can see the output HTML in real-time in our browser instance thanks to the included BrowserSync support.</p>
+<p><strong>Note:</strong> By defining the <strong>draft</strong> option, we create our post as a draft meaning it will not be included in a normal deployment until it is published. If you’d rather skip this step and author the post directly without going through the draft stage, simple remove the draft option from the command above.</p>
+<h1 id="Publishing-a-Post"><a href="#Publishing-a-Post" class="headerlink" title="Publishing a Post"></a>Publishing a Post</h1><p>Assuming that we chose to draft our post instead of publishing it directly, we need to manually publish it before it will be included in a standard deployment of our website.</p>
+<figure class="highlight plain"><figcaption><span>Publishing a Post</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo publish &quot;Hello World&quot;</div></pre></td></tr></table></figure>
+<p>The above basically has the effect of shifting our post from <strong>source/_drafts</strong> to <strong>source/_posts</strong>.</p>
+<h1 id="Deployment"><a href="#Deployment" class="headerlink" title="Deployment"></a>Deployment</h1><p>Now that we have a first version of our website we can deploy it and share it with the world!</p>
+<p>This can be achieved very easily using hexo as it has an inbuilt <strong>deploy</strong> command that just needs a bit of configuration from us.</p>
+<p>In my particular case, I am deploying to GitHub Pages which is obviously <strong>git</strong> based. Based on their documentation, I just need to deploy to a specific GitHub repo. The config for that looks as follows:</p>
+<figure class="highlight plain"><figcaption><span>_config.yml</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line"># Deployment</div><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repo: https://github.com/powell-christopher/powell-christopher.github.io.git</div><div class="line">  branch: master</div><div class="line">  message: hexo deploy</div><div class="line">...</div></pre></td></tr></table></figure>
+<p>Now that our configuration is in place, we can go ahead and deploy…</p>
+<figure class="highlight plain"><figcaption><span>Deployment</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">hexo clean</div><div class="line">hexo generate</div><div class="line">hexo deploy</div></pre></td></tr></table></figure>
+<p><strong>hexo clean</strong> will delete any previously generated content. It is good practice to start with a clean so that we can be sure that the output reflects the state of our sources exactly.</p>
+<p><strong>hexo generate</strong> will generate our static website based on our sources and selected theme (currently default).</p>
+<p><strong>hexo deploy</strong> deploys the generated output to our designated destination.</p>
+<p>That’s it!</p>
+<h1 id="Extras"><a href="#Extras" class="headerlink" title="Extras"></a>Extras</h1><p>In this section we will cover some nice extras that will facilitate our authoring process and add some extra value added to our website.</p>
+<h2 id="Maintain-Sources-in-VCS"><a href="#Maintain-Sources-in-VCS" class="headerlink" title="Maintain Sources in VCS"></a>Maintain Sources in VCS</h2><p>It is always a good idea to maintain our sources in a VCS solution. In my case I am using a GitHub repo. Let’s go ahead and deploy our project to GitHub.</p>
+<figure class="highlight plain"><figcaption><span>Commit to git and push to remote</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">hexo clean</div><div class="line">git init</div><div class="line">git add --all</div><div class="line">git commit -m &quot;Initial Commit&quot;</div><div class="line">git remote add origin https://github.com/powell-christopher/powell-christopher.github.io.git</div><div class="line">git remote -v</div><div class="line">git push origin master</div></pre></td></tr></table></figure>
+<p>In the above flow, we’re starting with a <strong>hexo clean</strong> to delete any generated content since we don’t want to store that with the sources. We then initialize git via a <strong>git init</strong> (since the project already exists). We now start working on our first commit. We basically add the whole directory (including subdirectories) containing our project via a <strong>git add -all</strong> and then commit the lot (locally) and specify a commit message. Now that the sources have been committed locally, we need to push the commit to the remote repo. To do that we first add the remote repo as an <strong>origin</strong> and finally we push to the <strong>master</strong> branch of our new <strong>origin</strong>.</p>
+<p>Now that our source project is safely stored, we can push to our remote repo whenever we have new changes to commit.</p>
+<figure class="highlight plain"><figcaption><span>Commit to git and push to remote</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">hexo clean</div><div class="line">git add --all &amp;&amp; git commit -m &quot;More changes...&quot;</div><div class="line">git push origin master</div></pre></td></tr></table></figure>
+<h2 id="Switching-to-a-new-Theme"><a href="#Switching-to-a-new-Theme" class="headerlink" title="Switching to a new Theme"></a>Switching to a new Theme</h2><p>Hexo offers a number of ready-made <a href="http://hexo.io/themes" target="_blank" rel="external">themes</a> to choose from.</p>
+<p>I am personally using the <a href="https://github.com/iissnan/hexo-theme-next/blob/master/README.en.md" target="_blank" rel="external">NexT</a> theme since I like the minimalist look of it. The same process should apply to any other theme.</p>
+<p>Installing the theme basically involves cloning the relevant git repo into our <strong>themes</strong> directory.</p>
+<figure class="highlight plain"><figcaption><span>Cloning a theme repo</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone https://github.com/iissnan/hexo-theme-next themes/next</div></pre></td></tr></table></figure>
+<p>The above will create a <strong>themes/next</strong> directory and clone the theme source project there.</p>
+<p>Now we need to instruct our hexo project to use the new theme. We just need to define the theme location in the configuration.</p>
+<figure class="highlight plain"><figcaption><span>_config.yml</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line"># Extensions</div><div class="line">theme: next</div><div class="line">...</div></pre></td></tr></table></figure>
+<p>At this point we can start our test server or redeploy our project and we should be using the new theme.</p>
+<h2 id="Categories-Tags-etc"><a href="#Categories-Tags-etc" class="headerlink" title="Categories, Tags, etc."></a>Categories, Tags, etc.</h2><p>Hexo supports a number of specialized page types intended to aid in navigation of our website. Categories and Tags are examples of this.</p>
+<p>Taking categories as an example, we start by creating a categories page.</p>
+<figure class="highlight plain"><figcaption><span>Creating a Categories page</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo new page &quot;categories&quot;</div></pre></td></tr></table></figure>
+<p>The above results in a <strong>categories</strong> directory being created under <strong>sources</strong> with an <strong>index.md</strong> file inside. We now need to open this file for editing and add a <strong>type: “categories”</strong> key-value pair.</p>
+<figure class="highlight plain"><figcaption><span>Tagging page as a Categories-Type</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">---</div><div class="line">title: categories</div><div class="line">date: 2017-03-27 20:00:00</div><div class="line">desc:</div><div class="line">type: &quot;categories&quot;</div><div class="line">---</div></pre></td></tr></table></figure>
+<p>The above new page will have content auto-generated for us by Hexo representing our post categories. In order to get that functionality, we just need to enable it in our <strong>_config.yml</strong> by uncommenting the <strong>category-dir: categories</strong> key-value pair.</p>
+<figure class="highlight plain"><figcaption><span>_config.yml</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line"># Directory</div><div class="line">source_dir: source</div><div class="line">public_dir: public</div><div class="line">#tag_dir: tags</div><div class="line">archive_dir: archives</div><div class="line">category_dir: categories</div><div class="line">code_dir: downloads/code</div><div class="line">i18n_dir: :lang</div><div class="line">skip_render:</div><div class="line">...</div></pre></td></tr></table></figure>
+<p>Now that we have a categories page generated by Hexo, we need a way to navigate to it. To do that we need to modify the menu for our selected theme by modifying the theme configuration. In my case this lives in <strong>themes/next/_config.yml</strong>. We simply uncomment the <strong>categories: /categories</strong> key-value pair. It is important that the page name matches throughout.</p>
+<figure class="highlight plain"><figcaption><span>themes/next/_config.yml</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line">menu:</div><div class="line">  home: /</div><div class="line">  categories: /categories</div><div class="line">  about: /about</div><div class="line">  archives: /archives</div><div class="line">  #tags: /tags</div><div class="line">  #sitemap: /sitemap.xml</div><div class="line">  #commonweal: /404.html</div><div class="line">...</div></pre></td></tr></table></figure>
+<p>We can now restart our test server or redeploy our project to see the results.</p>
+<p>Enabling <strong>tags</strong> is exactly the same procedure as per categories.</p>
+<h2 id="Setting-up-a-Favicon"><a href="#Setting-up-a-Favicon" class="headerlink" title="Setting up a Favicon"></a>Setting up a Favicon</h2><p>Looking at the NexT theme config file, we see that it expects a <strong>favicon.ico</strong> file in our <strong>source</strong> directory.</p>
+<figure class="highlight plain"><figcaption><span>themes/next/_config.yml</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line"># Put your favicon.ico into `hexo-site/source/` directory.</div><div class="line">favicon: /favicon.ico</div><div class="line">...</div></pre></td></tr></table></figure>
+<p>To set a favicon, all we need to do is place the expected file in the expected location. If one wold like to use a different filename or filetype, then we can easily modify the above configuration to take that into account.</p>
+<h2 id="Social-Media-Integrations"><a href="#Social-Media-Integrations" class="headerlink" title="Social Media Integrations"></a>Social Media Integrations</h2><p>The Hexo NexT theme offers a number of Social Media integrations. From having a quick look at the config file, the list includes Disqus, FaceBook, Duoshuo and more.</p>
+<p>Leveraging this is easy. In my case I wanted to use Disqus in order to have user comments on my pages. This turned out to be very easy. I just went on <a href="http://disqus.com" target="_blank" rel="external">disqus.com</a> and setup an account. I then setup a <strong>site</strong> and specified the URL where my website is hosted.</p>
+<p>At this point all that is left is to enable the disqus integration by specifying my disqus username in the theme config file.</p>
+<figure class="highlight plain"><figcaption><span>themes/next/_config.yml</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line"># Disqus</div><div class="line">disqus_shortname: YOUR_DISQUS_USERNAME</div><div class="line">...</div></pre></td></tr></table></figure>
+<p>If we redeploy and navigate to one of our posts we should now see the Disqus provided content at the bottom of the post.</p>
+<h2 id="Analytics"><a href="#Analytics" class="headerlink" title="Analytics"></a>Analytics</h2><p>Similarly to the Social Media integrations discussed above, the Hexo NexT theme supports a number of analytics suite integrations including Google Analytics, Baidu, etc.</p>
+<p>Setting up <a href="http://analytics.google.com" target="_blank" rel="external">Google Analytics</a> is simple. After setting up an account, we add a new website to the admin and generate a token for it. With this token in hand, we just need to define it in our configuration.</p>
+<figure class="highlight plain"><figcaption><span>themes/next/_config.yml</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line"># Google Analytics</div><div class="line">google_analytics: YOUR_TOKEN</div><div class="line">...</div></pre></td></tr></table></figure>
+<h1 id="Closing-off"><a href="#Closing-off" class="headerlink" title="Closing off"></a>Closing off</h1><p>That about sums it up in terms of my experience thus far with the Hexo Static Website Generator. Moving forward I intend to experiment with other Static Generators to build a better understanding of how they differ. I also plan to have a look at some of the tools listed on <a href="http://headlesscms.org" target="_blank" rel="external">headlessCMS</a> which provides a list of CMSs for <a href="http://jamstack.org" target="_blank" rel="external">JAMstack</a> Sites. It will be interesting to see what they bring to the table and whether the simplified administration poses any limitations on what we can do with the underlying Static Generator. When I find some time to do that and build some confidence with that tooling I will create a post on this blog to share my experience.</p>
+<p>In the meantime, thank you for joining me in this dive into Hexo and I hope that you find this useful.</p>
+<p>Till next time…</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Static-Website-Generators/" rel="tag"># Static Website Generators</a>
+          
+            <a href="/tags/Hexo-io/" rel="tag"># Hexo.io</a>
+          
+            <a href="/tags/Markdown/" rel="tag"># Markdown</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/27/Chocolatey-Package-Manager/" rel="next" title="Chocolatey Package Manager">
+                <i class="fa fa-chevron-left"></i> Chocolatey Package Manager
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/19/Static-Website-Generators/" rel="prev" title="Static Website Generators">
+                Static Website Generators <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/favicon.png"
+               alt="Christopher Powell" />
+          <p class="site-author-name" itemprop="name">Christopher Powell</p>
+           
+              <p class="site-description motion-element" itemprop="description">Technical lessons learned to share with the community</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/powell-christopher" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://mt.linkedin.com/in/chrispo" target="_blank" title="LinkedIn">
+                  
+                    <i class="fa fa-fw fa-linkedin"></i>
+                  
+                  LinkedIn
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Choosing-a-Static-Website-Generator"><span class="nav-number">1.1.</span> <span class="nav-text">Choosing a Static Website Generator</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Hexo-Setup"><span class="nav-number">2.</span> <span class="nav-text">Hexo Setup</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Project-Setup"><span class="nav-number">3.</span> <span class="nav-text">Project Setup</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Basic-Project-Config"><span class="nav-number">4.</span> <span class="nav-text">Basic Project Config</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#First-Test-Run"><span class="nav-number">5.</span> <span class="nav-text">First Test Run</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Authoring-a-Post"><span class="nav-number">6.</span> <span class="nav-text">Authoring a Post</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Publishing-a-Post"><span class="nav-number">7.</span> <span class="nav-text">Publishing a Post</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Deployment"><span class="nav-number">8.</span> <span class="nav-text">Deployment</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Extras"><span class="nav-number">9.</span> <span class="nav-text">Extras</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Maintain-Sources-in-VCS"><span class="nav-number">9.1.</span> <span class="nav-text">Maintain Sources in VCS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Switching-to-a-new-Theme"><span class="nav-number">9.2.</span> <span class="nav-text">Switching to a new Theme</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Categories-Tags-etc"><span class="nav-number">9.3.</span> <span class="nav-text">Categories, Tags, etc.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Setting-up-a-Favicon"><span class="nav-number">9.4.</span> <span class="nav-text">Setting up a Favicon</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Social-Media-Integrations"><span class="nav-number">9.5.</span> <span class="nav-text">Social Media Integrations</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Analytics"><span class="nav-number">9.6.</span> <span class="nav-text">Analytics</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Closing-off"><span class="nav-number">10.</span> <span class="nav-text">Closing off</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Christopher Powell</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
